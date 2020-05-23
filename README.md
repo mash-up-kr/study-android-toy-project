@@ -30,5 +30,6 @@ github api를 이용한 간단한 프로젝트를 통해 주요 기술들을 순
 
 ### 컨벤션 지키기
 
+- [android-style-guide](https://github.com/dlwls5201/android-style-guide/blob/master/README.md)
 - [kotlinlang coding convention](https://kotlinlang.org/docs/reference/coding-conventions.html)
 - [android developer coding convention](https://developer.android.com/kotlin/style-guide)
