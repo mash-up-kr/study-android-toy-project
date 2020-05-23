@@ -14,7 +14,7 @@ github api를 이용한 간단한 프로젝트를 통해 주요 기술들을 순
 3. 코드리뷰과 스터디를 통해 서로의 의견을 공유합니다.
 
 ### 슬랙 채널
-study-android-toy-project
+- study-android-toy-project
 
 ### 참고 프로젝트
 
