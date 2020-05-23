@@ -3,6 +3,9 @@
 ## 9th
 
 - 이진성 [dlwls5201](https://github.com/dlwls5201)
+- 이두한
+- 신초희
+- 유현선
 
 ### 목표
 
