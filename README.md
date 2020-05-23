@@ -2,6 +2,7 @@
 
 ## 9th
 
+- 이진성 [dlwls5201](https://github.com/dlwls5201)
 
 ### 목표
 
