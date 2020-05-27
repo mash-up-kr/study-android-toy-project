@@ -15,7 +15,7 @@
 
 3. 최종 적으로 MVVM으로 작업했을 때, 이전과 무엇이 달라졌고 무엇이 좋아졌는지 의견을 나눕니다.
 
-사용 기술 : Repository 패턴, RX, MVVM, DI
+- 학습기술 : Repository 패턴, RX, MVVM, DI
 
 ### 스터디 방식
 
