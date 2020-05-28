@@ -49,7 +49,7 @@
 3. 모델 설계의 중요성을 이해했는가?
 
 #### 3주차 (6월 16일)
-- Databinding과 MVVM 패턴을 학습니다.
+- Databinding과 MVVM 패턴을 학습합니다.
 
 학습 목표
 1. Databinding을 적절히 사용했는가?
