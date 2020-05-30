@@ -6,9 +6,9 @@
 - 이두한
 - 신초희 [godjoy](https://github.com/godjoy)
 - 유현선
-- 고승윤
+- 고승윤 [SeungYooon](https://github.com/SeungYooon)
 - 강다현
-- 현명준
+- 현명준 [바보]
 
 ### 대상
 
