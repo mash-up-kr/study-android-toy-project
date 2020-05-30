@@ -8,6 +8,7 @@
 - 유현선
 - 고승윤
 - 강다현 [dahyun1226](https://github.com/dahyun1226)
+- 현명준
 
 ### 대상
 
