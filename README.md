@@ -3,7 +3,7 @@
 ## 9th
 
 - 이진성 [dlwls5201](https://github.com/dlwls5201)
-- 이두한
+- 이두한 [koba1mobile](https://github.com/koba1mobile)
 - 신초희
 - 유현선
 - 고승윤
