@@ -3,12 +3,12 @@
 ## 9th
 
 - 이진성 [dlwls5201](https://github.com/dlwls5201)
-- 이두한
+- 이두한 [koba1mobile](https://github.com/koba1mobile)
 - 신초희 [godjoy](https://github.com/godjoy)
 - 유현선
-- 고승윤
+- 고승윤 [SeungYooon](https://github.com/SeungYooon)
 - 강다현 [dahyun1226](https://github.com/dahyun1226)
-- 현명준
+- 현명준 [바보]
 
 ### 대상
 
