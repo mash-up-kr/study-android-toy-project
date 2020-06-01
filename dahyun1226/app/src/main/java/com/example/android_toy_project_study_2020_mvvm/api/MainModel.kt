@@ -19,21 +19,34 @@ class MainModel (MainActivity: Activity){
     RetrofitService.getService().requestGithubResponse(keyword = keyword).enqueue(object :
         Callback<GithubResponseData> {
         override fun onFailure(call: Call<GithubResponseData>, t: Throwable) {
-            Log.e("!","onFailure 발생")
+            MainActivity.loading.visibility=INVISIBLE
+            MainActivity.textView3.text="에러발생 : "+t.toString()
+            MainActivity.textView3.visibility= VISIBLE
+            MainActivity.recycler.visibility= INVISIBLE
         }
 
         override fun onResponse(call: Call<GithubResponseData>, response: Response<GithubResponseData>) {
             if (response.isSuccessful) {
+                MainActivity.loading.visibility=INVISIBLE
+                MainActivity.textView3.visibility= INVISIBLE
                 val GithubResponseData = response.body()
                 MainActivity.loading.visibility=INVISIBLE
                 val list=ArrayList<gitItem>()
                 if (GithubResponseData != null) {
+                    if( GithubResponseData.items.size==0){
+                        MainActivity.textView3.text="결과 없음!!!"
+                        MainActivity.textView3.visibility= VISIBLE
+                        MainActivity.recycler.visibility= INVISIBLE
+                    }
+                   else{
                     for( i in 0..GithubResponseData.items.size-1)
                         list.add(gitItem(GithubResponseData.items[i].owner.avatar_url,GithubResponseData.items[i].full_name,GithubResponseData.items[i].language))
+
+                    val adapter = ItemAdapter(list)
+                    MainActivity.recycler.adapter = adapter
+                    MainActivity.recycler.visibility= VISIBLE
+                    }
                 }
-                val adapter = ItemAdapter(list)
-                MainActivity.recycler.adapter = adapter
-                MainActivity.recycler.visibility= VISIBLE
             }
         }
 

@@ -3,6 +3,7 @@ package com.example.android_toy_project_study_2020_mvvm.ui
 import android.os.Bundle
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android_toy_project_study_2020_mvvm.R
 import com.example.android_toy_project_study_2020_mvvm.api.MainModel
@@ -15,9 +16,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         recycler.visibility= INVISIBLE
         searchButton.setOnClickListener {
+            if(editText.text.toString().trim().length <= 0)
+            {Toast.makeText(this,"내용을 입력해주세요!",Toast.LENGTH_SHORT).show()}
+            else
+            {
             loading.visibility=VISIBLE
             val Model:MainModel= MainModel(this)
             Model.githubSearch(editText.text.toString())
+            }
         }
     }
 }
