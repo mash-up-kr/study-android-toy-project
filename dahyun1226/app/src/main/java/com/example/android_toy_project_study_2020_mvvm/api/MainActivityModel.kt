@@ -13,7 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainModel (MainActivity: Activity){
+class MainActivityModel (MainActivity: Activity){
     val MainActivity: Activity=MainActivity
     fun githubSearch(keyword: String){
     RetrofitService.getService().requestGithubResponse(keyword = keyword).enqueue(object :
@@ -33,13 +33,13 @@ class MainModel (MainActivity: Activity){
                 MainActivity.loading.visibility=INVISIBLE
                 val list=ArrayList<gitItem>()
                 if (GithubResponseData != null) {
-                    if( GithubResponseData.items.size==0){
+                    if(GithubResponseData.items.isEmpty()){
                         MainActivity.textView3.text="결과 없음!!!"
                         MainActivity.textView3.visibility= VISIBLE
                         MainActivity.recycler.visibility= INVISIBLE
                     }
                    else{
-                    for( i in 0..GithubResponseData.items.size-1)
+                    for( i in GithubResponseData.items.indices)
                         list.add(gitItem(GithubResponseData.items[i].owner.avatar_url,GithubResponseData.items[i].full_name,GithubResponseData.items[i].language))
 
                     val adapter = ItemAdapter(list)

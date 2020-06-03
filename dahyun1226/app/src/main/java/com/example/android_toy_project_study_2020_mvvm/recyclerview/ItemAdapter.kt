@@ -1,6 +1,7 @@
 package com.example.android_toy_project_study_2020_mvvm.recyclerview
 
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.android_toy_project_study_2020_mvvm.R
+import com.example.android_toy_project_study_2020_mvvm.ui.ViewRepositoryDetail
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 
@@ -21,7 +24,10 @@ class ItemAdapter (private var items: ArrayList<gitItem>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ItemAdapter.ViewHolder, position: Int) {
         val item = items[position]
-        val listener = View.OnClickListener {it ->
+        val listener = View.OnClickListener {
+            val intent = Intent(it.context,ViewRepositoryDetail::class.java)
+            intent.putExtra("FullName",item.full_name)
+            it.context.startActivity(intent)
         }
         holder.apply {
             bind(listener, item)

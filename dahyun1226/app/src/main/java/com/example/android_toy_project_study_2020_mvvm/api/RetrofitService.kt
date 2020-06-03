@@ -8,8 +8,8 @@ object RetrofitService {
         fun getService(): RetrofitServiceInterface = retrofit.create(RetrofitServiceInterface::class.java)
         private val retrofit =
             Retrofit.Builder()
-                .baseUrl("https://api.github.com") // 도메인 주소
-                .addConverterFactory(GsonConverterFactory.create()) // GSON을 사요아기 위해 ConverterFactory에 GSON 지정
+                .baseUrl("https://api.github.com")
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
 

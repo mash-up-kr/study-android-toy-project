@@ -6,7 +6,7 @@ import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android_toy_project_study_2020_mvvm.R
-import com.example.android_toy_project_study_2020_mvvm.api.MainModel
+import com.example.android_toy_project_study_2020_mvvm.api.MainActivityModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             else
             {
             loading.visibility=VISIBLE
-            val Model:MainModel= MainModel(this)
+            val Model:MainActivityModel= MainActivityModel(this)
             Model.githubSearch(editText.text.toString())
             }
         }
