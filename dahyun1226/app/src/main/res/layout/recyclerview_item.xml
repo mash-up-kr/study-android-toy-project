@@ -7,7 +7,7 @@
     tools:context=".ui.ViewRepositoryDetail">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/gitAvatarImage"
         android:layout_width="120dp"
         android:layout_height="120dp"
         tools:layout_editor_absoluteY="25dp"
@@ -20,7 +20,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/fullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -28,7 +28,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/language"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"

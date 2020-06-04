@@ -15,7 +15,7 @@
         android:background="@color/colorAccent">
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/backButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/abc_vector_test" />
@@ -48,7 +48,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"></androidx.recyclerview.widget.RecyclerView>
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/errorTextViewRepository"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

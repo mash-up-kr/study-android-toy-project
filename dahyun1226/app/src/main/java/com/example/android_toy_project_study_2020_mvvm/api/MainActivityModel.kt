@@ -17,21 +17,21 @@ class MainActivityModel (MainActivity: Activity){
         RetrofitService.getService().requestGithubResponse(keyword = keyword).enqueue(object: Callback<GithubResponseData> {
             override fun onFailure(call: Call<GithubResponseData>, t: Throwable) {
                 mainActivity.loading.visibility = INVISIBLE
-                mainActivity.textView3.text = "에러발생 : " + t.toString()
-                mainActivity.textView3.visibility = VISIBLE
+                mainActivity.errorTextViewRepository.text = "에러발생 : " + t.toString()
+                mainActivity.errorTextViewRepository.visibility = VISIBLE
                 mainActivity.recycler.visibility = INVISIBLE
             }
             override fun onResponse(call: Call<GithubResponseData>, response: Response<GithubResponseData>) {
                 if (response.isSuccessful) {
                     mainActivity.loading.visibility = INVISIBLE
-                    mainActivity.textView3.visibility = INVISIBLE
+                    mainActivity.errorTextViewRepository.visibility = INVISIBLE
                     val githubResponseData = response.body()
                     mainActivity.loading.visibility = INVISIBLE
                     val list=ArrayList<GitItem>()
                     if (githubResponseData != null) {
                         if (githubResponseData.items.isEmpty()){
-                            mainActivity.textView3.text = "결과 없음!!!"
-                            mainActivity.textView3.visibility = VISIBLE
+                            mainActivity.errorTextViewRepository.text = "결과 없음!!!"
+                            mainActivity.errorTextViewRepository.visibility = VISIBLE
                             mainActivity.recycler.visibility = INVISIBLE
                         } else {
                             for (i in githubResponseData.items.indices) {
