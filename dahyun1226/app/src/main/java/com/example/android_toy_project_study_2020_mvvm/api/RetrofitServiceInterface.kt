@@ -9,6 +9,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RetrofitServiceInterface {
+
     @GET("/search/repositories")
     fun requestGithubResponse(
         @Query("q") keyword: String,
@@ -17,12 +18,12 @@ interface RetrofitServiceInterface {
 
     @GET("/repos/{userName}/{repoName}")
     fun requestGetRepository(
-        @Path("userName") userName:String,
-        @Path("repoName") repoName:String
+        @Path("userName") userName: String,
+        @Path("repoName") repoName: String
     ): Call<GithubDetailRepoData>
 
     @GET("/users/{userName}")
     fun requestSingleUser(
-        @Path("userName") userName:String
+        @Path("userName") userName: String
     ): Call<GithubDetailUserData>
 }

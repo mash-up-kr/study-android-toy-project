@@ -17,13 +17,13 @@ class ViewRepositoryDetail : AppCompatActivity() {
         button1.setOnClickListener {
             finish()
         }
-        val intent = getIntent()
-        val fullName=intent.getStringExtra("FullName")
+        val intent = intent
+        val fullName = intent.getStringExtra("FullName")
         val userName = fullName.split("/")[0]
         val repoName = fullName.split("/")[1]
-        loading.visibility= View.VISIBLE
-        layout.visibility= View.INVISIBLE
-        val Model: ViewRepositoryDetailModel = ViewRepositoryDetailModel(this)
-        Model.getaRepository(userName,repoName)
+        loading.visibility = View.VISIBLE
+        layout.visibility = View.INVISIBLE
+        val model = ViewRepositoryDetailModel(this)
+        model.getRepository(userName,repoName)
     }
 }

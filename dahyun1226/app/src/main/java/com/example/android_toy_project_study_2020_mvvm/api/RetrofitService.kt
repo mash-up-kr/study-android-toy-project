@@ -11,6 +11,4 @@ object RetrofitService {
                 .baseUrl("https://api.github.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-
-
 }
