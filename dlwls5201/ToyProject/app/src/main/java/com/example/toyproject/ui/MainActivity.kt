@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private fun initMainFragment() {
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.lylFragmentContainer, MainFragment.newInstance())
+            .add(R.id.lylFragmentContainer, SearchFragment.newInstance())
             .commit()
     }
 

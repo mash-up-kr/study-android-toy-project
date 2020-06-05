@@ -16,16 +16,16 @@ import com.example.toyproject.data.model.RepoSearchResponse
 import com.example.toyproject.data.model.mapToView
 import com.example.toyproject.ui.adapter.RepositoryAdapter
 import com.example.toyproject.utils.AppUtils
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_search.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainFragment : Fragment() {
+class SearchFragment : Fragment() {
 
     companion object {
 
-        fun newInstance() = MainFragment()
+        fun newInstance() = SearchFragment()
     }
 
     private val repoAdapter by lazy {
@@ -47,7 +47,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
