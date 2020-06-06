@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.android_toy_project_study_2020_mvvm.R
 import com.example.android_toy_project_study_2020_mvvm.api.RepositoryDetailActivityController
+import com.example.android_toy_project_study_2020_mvvm.api.RepositoryDetailActivityController.Companion.intentFullName
 import kotlinx.android.synthetic.main.activity_view_repository_detail.bt_backButton
 
 class RepositoryDetailActivity : AppCompatActivity() {
@@ -15,7 +16,6 @@ class RepositoryDetailActivity : AppCompatActivity() {
         bt_backButton.setOnClickListener {
             finish()
         }
-        val intentFullName = "FullName"
         val fullName = intent.getStringExtra(intentFullName)
         val userName = fullName.split("/")[0]
         val repoName = fullName.split("/")[1]

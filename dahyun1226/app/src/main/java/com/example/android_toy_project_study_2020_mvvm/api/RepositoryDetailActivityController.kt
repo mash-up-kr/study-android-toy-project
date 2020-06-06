@@ -15,6 +15,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RepositoryDetailActivityController (_activity: Activity){
+    companion object {
+        const val intentFullName = "FullName"
+    }
     val activity = _activity
     init {
         activity.loading.visibility = VISIBLE
