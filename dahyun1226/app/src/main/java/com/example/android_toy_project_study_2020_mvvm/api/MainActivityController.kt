@@ -5,9 +5,9 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import com.example.android_toy_project_study_2020_mvvm.R
 import com.example.android_toy_project_study_2020_mvvm.R.*
+import com.example.android_toy_project_study_2020_mvvm.data.GithubRepoData
 import com.example.android_toy_project_study_2020_mvvm.data.GithubResponseData
 import com.example.android_toy_project_study_2020_mvvm.recyclerview.ItemAdapter
-import com.example.android_toy_project_study_2020_mvvm.recyclerview.GitItem
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,7 +37,7 @@ class MainActivityController(_mainActivity: Activity) {
                         mainActivity.tv_activity_main_ErrorTextViewRepository.visibility = INVISIBLE
                         val githubResponseData = response.body()
                         mainActivity.tv_activity_main_Loading.visibility = INVISIBLE
-                        val list = ArrayList<GitItem>()
+                        val list = ArrayList<GithubRepoData>()
                         if (githubResponseData != null) {
                             if (githubResponseData.items.isEmpty()) {
                                 mainActivity.tv_activity_main_ErrorTextViewRepository.text = mainActivity.getString(string.no_response)
@@ -45,13 +45,7 @@ class MainActivityController(_mainActivity: Activity) {
                                 mainActivity.rc_activity_main_Recycler.visibility = INVISIBLE
                             } else {
                                 githubResponseData.items.map {
-                                    list.add(
-                                        GitItem(
-                                            it.owner.avatarUrl,
-                                            it.fullName,
-                                            it.language
-                                        )
-                                    )
+                                    list.add(it)
                                 }
                                 val adapter = ItemAdapter(list)
                                 mainActivity.rc_activity_main_Recycler.adapter = adapter
