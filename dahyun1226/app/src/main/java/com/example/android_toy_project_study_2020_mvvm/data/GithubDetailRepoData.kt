@@ -8,5 +8,6 @@ data class GithubDetailRepoData (
     val fullName: String,
     val language: String?,
     val description:String,
-    val stargazers_count: Int
+    @SerializedName("stargazers_count")
+    val stargazersCount: Int
 )

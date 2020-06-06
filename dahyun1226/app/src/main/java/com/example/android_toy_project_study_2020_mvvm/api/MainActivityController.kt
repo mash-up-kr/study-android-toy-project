@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import com.example.android_toy_project_study_2020_mvvm.R
+import com.example.android_toy_project_study_2020_mvvm.R.*
 import com.example.android_toy_project_study_2020_mvvm.data.GithubResponseData
 import com.example.android_toy_project_study_2020_mvvm.recyclerview.ItemAdapter
 import com.example.android_toy_project_study_2020_mvvm.recyclerview.GitItem
@@ -12,7 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivityModel(_mainActivity: Activity) {
+class MainActivityController(_mainActivity: Activity) {
     val mainActivity = _mainActivity
     init {
         mainActivity.recycler.visibility = INVISIBLE
@@ -22,7 +23,7 @@ class MainActivityModel(_mainActivity: Activity) {
             .enqueue(object : Callback<GithubResponseData> {
                 override fun onFailure(call: Call<GithubResponseData>, t: Throwable) {
                     mainActivity.loading.visibility = INVISIBLE
-                    mainActivity.errorTextViewRepository.text = R.string.error.toString() + t.toString()
+                    mainActivity.errorTextViewRepository.text = mainActivity.getString(R.string.error) + t.toString()
                     mainActivity.errorTextViewRepository.visibility = VISIBLE
                     mainActivity.recycler.visibility = INVISIBLE
                 }
@@ -39,7 +40,7 @@ class MainActivityModel(_mainActivity: Activity) {
                         val list = ArrayList<GitItem>()
                         if (githubResponseData != null) {
                             if (githubResponseData.items.isEmpty()) {
-                                mainActivity.errorTextViewRepository.text = R.string.no_response.toString()
+                                mainActivity.errorTextViewRepository.text = mainActivity.getString(string.no_response)
                                 mainActivity.errorTextViewRepository.visibility = VISIBLE
                                 mainActivity.recycler.visibility = INVISIBLE
                             } else {
@@ -58,7 +59,7 @@ class MainActivityModel(_mainActivity: Activity) {
                             }
                         }
                     } else {
-                        mainActivity.errorTextViewRepository.text = R.string.error.toString()
+                        mainActivity.errorTextViewRepository.text = mainActivity.getString(R.string.error)
                         mainActivity.errorTextViewRepository.visibility = VISIBLE
                         mainActivity.recycler.visibility = INVISIBLE
                     }

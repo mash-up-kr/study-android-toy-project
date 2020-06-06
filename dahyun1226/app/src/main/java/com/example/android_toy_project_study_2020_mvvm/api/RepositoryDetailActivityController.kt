@@ -14,7 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ViewRepositoryDetailModel (_activity: Activity){
+class RepositoryDetailActivityController (_activity: Activity){
     val activity = _activity
     init {
         activity.loading.visibility = VISIBLE
@@ -25,7 +25,7 @@ class ViewRepositoryDetailModel (_activity: Activity){
         RetrofitService.getService().requestGetRepository(userName,repoName).enqueue(object: Callback<GithubDetailRepoData>{
             override fun onFailure(call: Call<GithubDetailRepoData>, t: Throwable) {
                 activity.loading.visibility = INVISIBLE
-                activity.errorTextViewRepository.text = R.string.error.toString() + t.toString()
+                activity.errorTextViewRepository.text = activity.getString(R.string.error) + t.toString()
                 activity.errorTextViewRepository.visibility = VISIBLE
             }
             override fun onResponse(call: Call<GithubDetailRepoData>, response: Response<GithubDetailRepoData>) {
@@ -33,10 +33,10 @@ class ViewRepositoryDetailModel (_activity: Activity){
                 if (repoData != null) {
                     Glide.with(activity).load(repoData.owner.avatarUrl).into(activity.gitAvatarImage)
                     activity.fullName.text = repoData.fullName
-                    activity.stars.text = repoData.stargazers_count.toString() + R.string.stars.toString()
+                    activity.stars.text = repoData.stargazersCount.toString() + activity.getString(R.string.stars)
                     activity.description.text = repoData.description
                     if (repoData.language==null){
-                        activity.language.text = R.string.no_language.toString()
+                        activity.language.text = activity.getString(R.string.no_language)
                     } else {
                         activity.language.text = repoData.language
                     }
@@ -49,16 +49,16 @@ class ViewRepositoryDetailModel (_activity: Activity){
         RetrofitService.getService().requestSingleUser(userName).enqueue(object: Callback<GithubDetailUserData>{
             override fun onFailure(call: Call<GithubDetailUserData>, t: Throwable) {
                 activity.loading.visibility = INVISIBLE
-                activity.errorTextViewRepository.text = R.string.error.toString() + t.toString()
+                activity.errorTextViewRepository.text = activity.getString(R.string.error) + t.toString()
                 activity.errorTextViewRepository.visibility = VISIBLE
             }
             override fun onResponse(call: Call<GithubDetailUserData>, response: Response<GithubDetailUserData>) {
                 val userData = response.body()
                 if (userData != null) {
                     activity.followersAndFollowing.text =
-                        R.string.followers.toString() +
+                        activity.getString(R.string.followers) +
                         " : " + userData.followers.toString() +
-                        " , " + R.string.followings.toString() +
+                        " , " + activity.getString(R.string.followers) +
                         " : " + userData.following.toString()
                 }
                 activity.loading.visibility = INVISIBLE

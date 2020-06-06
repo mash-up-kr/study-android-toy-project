@@ -1,6 +1,7 @@
 package com.example.android_toy_project_study_2020_mvvm.recyclerview
 
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,8 @@ class ItemAdapter (private var items: ArrayList<GitItem>) : RecyclerView.Adapter
         val item = items[position]
         val listener = View.OnClickListener {
             val intent = Intent(it.context,RepositoryDetailActivity::class.java)
-            intent.putExtra("FullName",item.full_name)
+            val intentFullName = "FullName"
+            intent.putExtra(intentFullName,item.fullName)
             it.context.startActivity(intent)
         }
         holder.apply {
@@ -36,16 +38,16 @@ class ItemAdapter (private var items: ArrayList<GitItem>) : RecyclerView.Adapter
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        private var view: View = v
+        private var view = v
         fun bind(listener: View.OnClickListener, item: GitItem) {
-            view.fullName.text = item.full_name
+            view.fullName.text = item.fullName
             if (item.language == null) {
-                view.language.text = R.string.no_language.toString()
+                view.language.text = view.context.getString(R.string.no_language)
             } else {
                 view.language.text = item.language
             }
             view.setOnClickListener(listener)
-            Glide.with(view).load(item.avatar_url).into(view.gitAvatarImage)
+            Glide.with(view).load(item.avatarUrl).into(view.gitAvatarImage)
         }
     }
 
