@@ -13,6 +13,9 @@ import retrofit2.Response
 
 class MainActivityModel(_mainActivity: Activity) {
     val mainActivity = _mainActivity
+    init {
+        mainActivity.recycler.visibility = INVISIBLE
+    }
     fun githubSearch(keyword: String) {
         RetrofitService.getService().requestGithubResponse(keyword = keyword)
             .enqueue(object : Callback<GithubResponseData> {
@@ -59,5 +62,12 @@ class MainActivityModel(_mainActivity: Activity) {
                 }
 
             })
+    }
+    fun loadingOnOffMainActivity(){
+        if (mainActivity.loading.visibility == VISIBLE){
+            mainActivity.loading.visibility = INVISIBLE
+        } else {
+            mainActivity.loading.visibility = VISIBLE
+        }
     }
 }

@@ -14,6 +14,7 @@ class ViewRepositoryDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_repository_detail)
+        val model = ViewRepositoryDetailModel(this)
         backButton.setOnClickListener {
             finish()
         }
@@ -21,10 +22,6 @@ class ViewRepositoryDetail : AppCompatActivity() {
         val fullName = intent.getStringExtra("FullName")
         val userName = fullName.split("/")[0]
         val repoName = fullName.split("/")[1]
-        loading.visibility = View.VISIBLE
-        errorTextViewRepository.visibility = View.INVISIBLE
-        layout.visibility = View.INVISIBLE
-        val model = ViewRepositoryDetailModel(this)
         model.getRepository(userName,repoName)
     }
 }

@@ -14,13 +14,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recycler.visibility = INVISIBLE
+        val model = MainActivityModel(this)
         searchButton.setOnClickListener {
             if (editText.text.toString().trim().isEmpty()) {
                 Toast.makeText(this,"내용을 입력해주세요!",Toast.LENGTH_SHORT).show()
             } else {
-                loading.visibility = VISIBLE
-                val model = MainActivityModel(this)
+                model.loadingOnOffMainActivity()
                 model.githubSearch(editText.text.toString())
             }
         }

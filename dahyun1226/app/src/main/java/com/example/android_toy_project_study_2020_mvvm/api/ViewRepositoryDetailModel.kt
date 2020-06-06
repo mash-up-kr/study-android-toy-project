@@ -1,6 +1,7 @@
 package com.example.android_toy_project_study_2020_mvvm.api
 
 import android.app.Activity
+import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import com.bumptech.glide.Glide
@@ -12,8 +13,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ViewRepositoryDetailModel (Activity: Activity){
-    val activity = Activity
+class ViewRepositoryDetailModel (_activity: Activity){
+    val activity = _activity
+    init {
+        activity.loading.visibility = VISIBLE
+        activity.errorTextViewRepository.visibility = INVISIBLE
+        activity.layout.visibility = INVISIBLE
+    }
     fun getRepository(userName: String, repoName:String){
         RetrofitService.getService().requestGetRepository(userName,repoName).enqueue(object: Callback<GithubDetailRepoData>{
             override fun onFailure(call: Call<GithubDetailRepoData>, t: Throwable) {
