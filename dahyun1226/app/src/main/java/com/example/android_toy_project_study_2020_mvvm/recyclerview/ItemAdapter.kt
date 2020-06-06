@@ -41,7 +41,7 @@ class ItemAdapter (private var items: ArrayList<GitItem>) : RecyclerView.Adapter
         fun bind(listener: View.OnClickListener, item: GitItem) {
             view.fullName.text = item.full_name
             if (item.language == null) {
-                view.language.text = "No language specified"
+                view.language.text = R.string.no_language.toString()
             } else {
                 view.language.text = item.language
             }

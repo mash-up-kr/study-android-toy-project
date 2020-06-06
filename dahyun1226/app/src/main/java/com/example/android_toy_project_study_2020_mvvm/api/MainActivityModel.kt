@@ -3,6 +3,7 @@ package com.example.android_toy_project_study_2020_mvvm.api
 import android.app.Activity
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import com.example.android_toy_project_study_2020_mvvm.R
 import com.example.android_toy_project_study_2020_mvvm.data.GithubResponseData
 import com.example.android_toy_project_study_2020_mvvm.recyclerview.ItemAdapter
 import com.example.android_toy_project_study_2020_mvvm.recyclerview.GitItem
@@ -21,7 +22,7 @@ class MainActivityModel(_mainActivity: Activity) {
             .enqueue(object : Callback<GithubResponseData> {
                 override fun onFailure(call: Call<GithubResponseData>, t: Throwable) {
                     mainActivity.loading.visibility = INVISIBLE
-                    mainActivity.errorTextViewRepository.text = "에러발생 : " + t.toString()
+                    mainActivity.errorTextViewRepository.text = R.string.error.toString() + t.toString()
                     mainActivity.errorTextViewRepository.visibility = VISIBLE
                     mainActivity.recycler.visibility = INVISIBLE
                 }
@@ -38,7 +39,7 @@ class MainActivityModel(_mainActivity: Activity) {
                         val list = ArrayList<GitItem>()
                         if (githubResponseData != null) {
                             if (githubResponseData.items.isEmpty()) {
-                                mainActivity.errorTextViewRepository.text = "결과 없음!!!"
+                                mainActivity.errorTextViewRepository.text = R.string.no_response.toString()
                                 mainActivity.errorTextViewRepository.visibility = VISIBLE
                                 mainActivity.recycler.visibility = INVISIBLE
                             } else {
@@ -57,7 +58,9 @@ class MainActivityModel(_mainActivity: Activity) {
                             }
                         }
                     } else {
-
+                        mainActivity.errorTextViewRepository.text = R.string.error.toString()
+                        mainActivity.errorTextViewRepository.visibility = VISIBLE
+                        mainActivity.recycler.visibility = INVISIBLE
                     }
                 }
 

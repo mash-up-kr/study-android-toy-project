@@ -5,6 +5,7 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import com.bumptech.glide.Glide
+import com.example.android_toy_project_study_2020_mvvm.R
 import com.example.android_toy_project_study_2020_mvvm.data.GithubDetailRepoData
 import com.example.android_toy_project_study_2020_mvvm.data.GithubDetailUserData
 import kotlinx.android.synthetic.main.activity_view_repository_detail.*
@@ -24,7 +25,7 @@ class ViewRepositoryDetailModel (_activity: Activity){
         RetrofitService.getService().requestGetRepository(userName,repoName).enqueue(object: Callback<GithubDetailRepoData>{
             override fun onFailure(call: Call<GithubDetailRepoData>, t: Throwable) {
                 activity.loading.visibility = INVISIBLE
-                activity.errorTextViewRepository.text = "에러발생! : " + t.toString()
+                activity.errorTextViewRepository.text = R.string.error.toString() + t.toString()
                 activity.errorTextViewRepository.visibility = VISIBLE
             }
             override fun onResponse(call: Call<GithubDetailRepoData>, response: Response<GithubDetailRepoData>) {
@@ -32,10 +33,10 @@ class ViewRepositoryDetailModel (_activity: Activity){
                 if (repoData != null) {
                     Glide.with(activity).load(repoData.owner.avatar_url).into(activity.gitAvatarImage)
                     activity.fullName.text = repoData.full_name
-                    activity.stars.text = repoData.stargazers_count.toString() + " stars"
+                    activity.stars.text = repoData.stargazers_count.toString() + R.string.stars.toString()
                     activity.description.text = repoData.description
                     if (repoData.language==null){
-                        activity.language.text = "No language specified"
+                        activity.language.text = R.string.no_language.toString()
                     } else {
                         activity.language.text = repoData.language
                     }
@@ -48,13 +49,17 @@ class ViewRepositoryDetailModel (_activity: Activity){
         RetrofitService.getService().requestSingleUser(userName).enqueue(object: Callback<GithubDetailUserData>{
             override fun onFailure(call: Call<GithubDetailUserData>, t: Throwable) {
                 activity.loading.visibility = INVISIBLE
-                activity.errorTextViewRepository.text = "에러발생! : " + t.toString()
+                activity.errorTextViewRepository.text = R.string.error.toString() + t.toString()
                 activity.errorTextViewRepository.visibility = VISIBLE
             }
             override fun onResponse(call: Call<GithubDetailUserData>, response: Response<GithubDetailUserData>) {
                 val userData = response.body()
                 if (userData != null) {
-                    activity.followersAndFollowing.text = "followers : " + userData.followers.toString() + ", following : " + userData.following.toString()
+                    activity.followersAndFollowing.text =
+                        R.string.followers.toString() +
+                        " : " + userData.followers.toString() +
+                        " , " + R.string.followings.toString() +
+                        " : " + userData.following.toString()
                 }
                 activity.loading.visibility = INVISIBLE
                 activity.layout.visibility = VISIBLE

@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         val model = MainActivityModel(this)
         searchButton.setOnClickListener {
             if (editText.text.toString().trim().isEmpty()) {
-                Toast.makeText(this,"내용을 입력해주세요!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,R.string.put_contents.toString(),Toast.LENGTH_SHORT).show()
             } else {
                 model.loadingOnOffMainActivity()
                 model.githubSearch(editText.text.toString())
