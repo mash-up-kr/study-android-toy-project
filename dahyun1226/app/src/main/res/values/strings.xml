@@ -7,4 +7,6 @@
     <string name="put_contents">결과 없음!!!  </string>
     <string name="no_language">No language specified</string>
     <string name="stars">Stars</string>
+    <string name="loading">Loading...</string>
+    <string name="search">Stars</string>
 </resources>

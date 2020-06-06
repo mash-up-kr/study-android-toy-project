@@ -1,8 +1,11 @@
 package com.example.android_toy_project_study_2020_mvvm.data
 
+import com.google.gson.annotations.SerializedName
+
 data class GithubDetailRepoData (
     val owner: GithubOwnerData,
-    val full_name: String,
+    @SerializedName("full_name")
+    val fullName: String,
     val language: String?,
     val description:String,
     val stargazers_count: Int

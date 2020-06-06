@@ -15,13 +15,13 @@
         android:background="@color/colorAccent">
 
         <Button
-            android:id="@+id/backButton"
+            android:id="@+id/bt_backButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/abc_vector_test" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/et_EditText"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -29,7 +29,7 @@
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/searchButton"
+            android:id="@+id/bt_SearchButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:drawable/ic_menu_search" />

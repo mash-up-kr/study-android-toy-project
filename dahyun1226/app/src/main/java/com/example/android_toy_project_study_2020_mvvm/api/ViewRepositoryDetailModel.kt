@@ -31,8 +31,8 @@ class ViewRepositoryDetailModel (_activity: Activity){
             override fun onResponse(call: Call<GithubDetailRepoData>, response: Response<GithubDetailRepoData>) {
                 val repoData=response.body()
                 if (repoData != null) {
-                    Glide.with(activity).load(repoData.owner.avatar_url).into(activity.gitAvatarImage)
-                    activity.fullName.text = repoData.full_name
+                    Glide.with(activity).load(repoData.owner.avatarUrl).into(activity.gitAvatarImage)
+                    activity.fullName.text = repoData.fullName
                     activity.stars.text = repoData.stargazers_count.toString() + R.string.stars.toString()
                     activity.description.text = repoData.description
                     if (repoData.language==null){

@@ -14,13 +14,13 @@
         android:background="@color/colorAccent">
 
         <Button
-            android:id="@+id/backButton"
+            android:id="@+id/bt_backButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/abc_vector_test" />
 
         <TextView
-            android:id="@+id/viewRepository"
+            android:id="@+id/tv_ViewRepository"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -115,7 +115,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/iv_Compass"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     app:srcCompat="@android:drawable/ic_menu_compass"
@@ -135,7 +135,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/iv_Compass2"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     app:srcCompat="@android:drawable/ic_menu_compass"

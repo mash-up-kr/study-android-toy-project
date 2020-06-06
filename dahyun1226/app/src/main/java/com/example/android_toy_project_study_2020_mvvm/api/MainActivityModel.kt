@@ -46,8 +46,8 @@ class MainActivityModel(_mainActivity: Activity) {
                                 githubResponseData.items.map {
                                     list.add(
                                         GitItem(
-                                            it.owner.avatar_url,
-                                            it.full_name,
+                                            it.owner.avatarUrl,
+                                            it.fullName,
                                             it.language
                                         )
                                     )
