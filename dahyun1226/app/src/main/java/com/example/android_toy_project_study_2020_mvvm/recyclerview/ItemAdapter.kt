@@ -27,7 +27,6 @@ class ItemAdapter (private var items: ArrayList<GitItem>) : RecyclerView.Adapter
         }
         holder.apply {
             bind(listener, item)
-            itemView.tag = item
         }
     }
 

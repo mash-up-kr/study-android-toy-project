@@ -18,7 +18,6 @@ class RepositoryDetailActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             finish()
         }
-        val intent = intent
         val fullName = intent.getStringExtra("FullName")
         val userName = fullName.split("/")[0]
         val repoName = fullName.split("/")[1]
