@@ -24,7 +24,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Search.."
+            android:hint="@string/search"
             android:inputType="textPersonName" />
 
         <Button
@@ -61,7 +61,7 @@
                 android:layout_marginTop="280dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:text="Loading..."
+                android:text="@string/loading"
                 android:textColor="@android:color/background_light"
                 android:textSize="50sp"
                 android:visibility="invisible" />

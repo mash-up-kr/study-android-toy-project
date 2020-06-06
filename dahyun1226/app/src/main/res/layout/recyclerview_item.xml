@@ -24,14 +24,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="TextView"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_recyclerview_item_Language"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
             android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>

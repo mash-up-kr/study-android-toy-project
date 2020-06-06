@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="View Repository"
+            android:text="@string/view_repository"
             android:textColor="@android:color/background_light"
             android:textSize="30sp">
 
@@ -41,7 +41,7 @@
             android:layout_gravity="center"
             android:background="@color/colorAccent"
             android:gravity="center"
-            android:text="Loading..."
+            android:text="@string/loading"
             android:textColor="@android:color/background_light"
             android:textSize="50sp"
             android:visibility="invisible" />
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center|center_horizontal"
-            android:text="에러메세지"
+            android:text="@string/error"
             android:textSize="40sp"
             android:visibility="invisible" />
 
@@ -85,7 +85,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="30dp"
-                        android:text="TextView"
                         android:textSize="22sp" />
 
                     <TextView
@@ -93,7 +92,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="TextView"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -105,7 +103,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="TextView"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -124,8 +121,7 @@
                     android:id="@+id/tv_activity_repository_detail_Description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="TextView" />
+                    android:layout_marginLeft="10dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -144,8 +140,7 @@
                     android:id="@+id/tv_activity_repository_detail_Language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="TextView" />
+                    android:layout_marginLeft="10dp" />
             </LinearLayout>
 
         </LinearLayout>
