@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_view_repository_detail.*
 import kotlinx.android.synthetic.main.activity_view_repository_detail.backButton
 import kotlinx.android.synthetic.main.activity_view_repository_detail.loading
 
-class ViewRepositoryDetail : AppCompatActivity() {
+class RepositoryDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
