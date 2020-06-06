@@ -16,16 +16,16 @@ import retrofit2.Response
 class MainActivityController(_mainActivity: Activity) {
     val mainActivity = _mainActivity
     init {
-        mainActivity.recycler.visibility = INVISIBLE
+        mainActivity.rc_activity_main_Recycler.visibility = INVISIBLE
     }
     fun githubSearch(keyword: String) {
         RetrofitService.getService().requestGithubResponse(keyword = keyword)
             .enqueue(object : Callback<GithubResponseData> {
                 override fun onFailure(call: Call<GithubResponseData>, t: Throwable) {
-                    mainActivity.loading.visibility = INVISIBLE
-                    mainActivity.errorTextViewRepository.text = mainActivity.getString(R.string.error) + t.toString()
-                    mainActivity.errorTextViewRepository.visibility = VISIBLE
-                    mainActivity.recycler.visibility = INVISIBLE
+                    mainActivity.tv_activity_main_Loading.visibility = INVISIBLE
+                    mainActivity.tv_activity_main_ErrorTextViewRepository.text = mainActivity.getString(R.string.error) + t.toString()
+                    mainActivity.tv_activity_main_ErrorTextViewRepository.visibility = VISIBLE
+                    mainActivity.rc_activity_main_Recycler.visibility = INVISIBLE
                 }
 
                 override fun onResponse(
@@ -33,16 +33,16 @@ class MainActivityController(_mainActivity: Activity) {
                     response: Response<GithubResponseData>
                 ) {
                     if (response.isSuccessful) {
-                        mainActivity.loading.visibility = INVISIBLE
-                        mainActivity.errorTextViewRepository.visibility = INVISIBLE
+                        mainActivity.tv_activity_main_Loading.visibility = INVISIBLE
+                        mainActivity.tv_activity_main_ErrorTextViewRepository.visibility = INVISIBLE
                         val githubResponseData = response.body()
-                        mainActivity.loading.visibility = INVISIBLE
+                        mainActivity.tv_activity_main_Loading.visibility = INVISIBLE
                         val list = ArrayList<GitItem>()
                         if (githubResponseData != null) {
                             if (githubResponseData.items.isEmpty()) {
-                                mainActivity.errorTextViewRepository.text = mainActivity.getString(string.no_response)
-                                mainActivity.errorTextViewRepository.visibility = VISIBLE
-                                mainActivity.recycler.visibility = INVISIBLE
+                                mainActivity.tv_activity_main_ErrorTextViewRepository.text = mainActivity.getString(string.no_response)
+                                mainActivity.tv_activity_main_ErrorTextViewRepository.visibility = VISIBLE
+                                mainActivity.rc_activity_main_Recycler.visibility = INVISIBLE
                             } else {
                                 githubResponseData.items.map {
                                     list.add(
@@ -54,24 +54,24 @@ class MainActivityController(_mainActivity: Activity) {
                                     )
                                 }
                                 val adapter = ItemAdapter(list)
-                                mainActivity.recycler.adapter = adapter
-                                mainActivity.recycler.visibility = VISIBLE
+                                mainActivity.rc_activity_main_Recycler.adapter = adapter
+                                mainActivity.rc_activity_main_Recycler.visibility = VISIBLE
                             }
                         }
                     } else {
-                        mainActivity.errorTextViewRepository.text = mainActivity.getString(R.string.error)
-                        mainActivity.errorTextViewRepository.visibility = VISIBLE
-                        mainActivity.recycler.visibility = INVISIBLE
+                        mainActivity.tv_activity_main_ErrorTextViewRepository.text = mainActivity.getString(R.string.error)
+                        mainActivity.tv_activity_main_ErrorTextViewRepository.visibility = VISIBLE
+                        mainActivity.rc_activity_main_Recycler.visibility = INVISIBLE
                     }
                 }
 
             })
     }
     fun loadingOnOffMainActivity(){
-        if (mainActivity.loading.visibility == VISIBLE){
-            mainActivity.loading.visibility = INVISIBLE
+        if (mainActivity.tv_activity_main_Loading.visibility == VISIBLE){
+            mainActivity.tv_activity_main_Loading.visibility = INVISIBLE
         } else {
-            mainActivity.loading.visibility = VISIBLE
+            mainActivity.tv_activity_main_Loading.visibility = VISIBLE
         }
     }
 }

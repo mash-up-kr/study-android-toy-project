@@ -40,14 +40,14 @@ class ItemAdapter (private var items: ArrayList<GitItem>) : RecyclerView.Adapter
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view = v
         fun bind(listener: View.OnClickListener, item: GitItem) {
-            view.fullName.text = item.fullName
+            view.tv_recyclerview_item_FullName.text = item.fullName
             if (item.language == null) {
-                view.language.text = view.context.getString(R.string.no_language)
+                view.tv_recyclerview_item_Language.text = view.context.getString(R.string.no_language)
             } else {
-                view.language.text = item.language
+                view.tv_recyclerview_item_Language.text = item.language
             }
             view.setOnClickListener(listener)
-            Glide.with(view).load(item.avatarUrl).into(view.gitAvatarImage)
+            Glide.with(view).load(item.avatarUrl).into(view.iv_recyclerview_item_GitAvatarImage)
         }
     }
 

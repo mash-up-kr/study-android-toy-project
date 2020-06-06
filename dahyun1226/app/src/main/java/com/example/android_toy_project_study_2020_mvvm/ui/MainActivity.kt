@@ -13,12 +13,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val model = MainActivityController(this)
-        bt_SearchButton.setOnClickListener {
-            if (et_EditText.text.toString().trim().isEmpty()) {
+        bt_activity_main_SearchButton.setOnClickListener {
+            if (et_activity_main_Search.text.toString().trim().isEmpty()) {
                 Toast.makeText(this, getString(R.string.put_contents), Toast.LENGTH_SHORT).show()
             } else {
                 model.loadingOnOffMainActivity()
-                model.githubSearch(et_EditText.text.toString())
+                model.githubSearch(et_activity_main_Search.text.toString())
             }
         }
     }

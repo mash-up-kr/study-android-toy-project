@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.example.android_toy_project_study_2020_mvvm.R
 import com.example.android_toy_project_study_2020_mvvm.api.RepositoryDetailActivityController
 import com.example.android_toy_project_study_2020_mvvm.api.RepositoryDetailActivityController.Companion.intentFullName
-import kotlinx.android.synthetic.main.activity_view_repository_detail.bt_backButton
+import kotlinx.android.synthetic.main.activity_view_repository_detail.*
 
 class RepositoryDetailActivity : AppCompatActivity() {
 
@@ -13,7 +13,7 @@ class RepositoryDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_repository_detail)
         val model = RepositoryDetailActivityController(this)
-        bt_backButton.setOnClickListener {
+        bt_activity_repository_detail_BackButton.setOnClickListener {
             finish()
         }
         val fullName = intent.getStringExtra(intentFullName)
