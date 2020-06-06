@@ -43,12 +43,12 @@ class MainActivityModel(_mainActivity: Activity) {
                                 mainActivity.errorTextViewRepository.visibility = VISIBLE
                                 mainActivity.recycler.visibility = INVISIBLE
                             } else {
-                                for (i in githubResponseData.items.indices) {
+                                githubResponseData.items.map {
                                     list.add(
                                         GitItem(
-                                            githubResponseData.items[i].owner.avatar_url,
-                                            githubResponseData.items[i].full_name,
-                                            githubResponseData.items[i].language
+                                            it.owner.avatar_url,
+                                            it.full_name,
+                                            it.language
                                         )
                                     )
                                 }
