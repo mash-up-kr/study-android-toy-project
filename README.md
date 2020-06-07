@@ -4,8 +4,10 @@
 
 - 이진성 [dlwls5201](https://github.com/dlwls5201)
 - 이두한
-- 신초희
+- 신초희 [godjoy](https://github.com/godjoy)
 - 유현선
+- 고승윤
+- 
 
 ### 대상
 
