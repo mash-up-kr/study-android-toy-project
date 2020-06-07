@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MVC</string>
+
+    <!--main-->
+    <string name="no_connection">oppps~ No connection</string>
+    <string name="btn_retry">Try Again</string>
+    <string name="main_noResult">검색 결과 없음</string>
+
+    <!--detail-->
+    <string name="star"></string>
+</resources>
