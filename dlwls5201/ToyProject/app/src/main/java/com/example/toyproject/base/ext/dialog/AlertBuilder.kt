@@ -5,7 +5,7 @@ import android.content.DialogInterface
 import androidx.annotation.StringRes
 
 interface AlertBuilder<out D : DialogInterface> {
-    val ctx: Context
+    val context: Context
 
     var title: CharSequence
 

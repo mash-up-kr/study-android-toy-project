@@ -4,8 +4,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 
-internal class AndroidAlertBuilder(override val ctx: Context) : AlertBuilder<AlertDialog> {
-    private val builder = AlertDialog.Builder(ctx)
+internal class AndroidAlertBuilder(override val context: Context) : AlertBuilder<AlertDialog> {
+    private val builder = AlertDialog.Builder(context)
 
     override var title: CharSequence
         get() = throw Exception("Property does not have a getter")
