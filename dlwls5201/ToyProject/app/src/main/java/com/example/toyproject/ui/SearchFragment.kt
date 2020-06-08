@@ -13,7 +13,7 @@ import com.example.toyproject.base.ext.toast
 import com.example.toyproject.base.util.Dlog
 import com.example.toyproject.data.api.ApiProvider
 import com.example.toyproject.data.model.RepoSearchResponse
-import com.example.toyproject.data.model.mapToView
+import com.example.toyproject.data.model.mapToPresentation
 import com.example.toyproject.ui.adapter.RepositoryAdapter
 import com.example.toyproject.utils.AppUtils
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -117,7 +117,7 @@ class SearchFragment : Fragment() {
                     val body = response.body()
                     if (response.isSuccessful && null != body) {
                         with(repoAdapter) {
-                            setItems(body.items.map { it.mapToView(requireContext()) })
+                            setItems(body.items.map { it.mapToPresentation(requireContext()) })
                         }
 
                         if (0 == body.totalCount) {

@@ -32,7 +32,7 @@ data class RepoModel(
     )
 }
 
-fun RepoModel.mapToView(context: Context) = RepoItem(
+fun RepoModel.mapToPresentation(context: Context) = RepoItem(
     title = fullName,
     repoName = name,
     owner = RepoItem.OwnerItem(

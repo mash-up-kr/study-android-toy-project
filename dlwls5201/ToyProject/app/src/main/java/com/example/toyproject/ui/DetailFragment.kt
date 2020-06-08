@@ -14,7 +14,7 @@ import com.example.toyproject.base.util.Dlog
 import com.example.toyproject.data.api.ApiProvider
 import com.example.toyproject.data.model.RepoModel
 import com.example.toyproject.data.model.UserModel
-import com.example.toyproject.data.model.mapToView
+import com.example.toyproject.data.model.mapToPresentation
 import com.example.toyproject.ui.model.RepoItem
 import com.example.toyproject.ui.model.UserItem
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -92,7 +92,7 @@ class DetailFragment : Fragment() {
                 val body = response.body()
                 if (response.isSuccessful && null != body) {
                     //repo 데이터를 화면에 보여줍니다.
-                    setRepoData(body.mapToView(requireContext()))
+                    setRepoData(body.mapToPresentation(requireContext()))
                 } else {
                     //에러를 표시합니다.
                     showError(response.message())
@@ -129,7 +129,7 @@ class DetailFragment : Fragment() {
                 val body = response.body()
                 if (response.isSuccessful && null != body) {
                     //user 데이터를 화면에 보여줍니다.
-                    setUserData(body.mapToView(requireContext()))
+                    setUserData(body.mapToPresentation(requireContext()))
                 } else {
                     //에러를 표시합니다.
                     showError(response.message())
