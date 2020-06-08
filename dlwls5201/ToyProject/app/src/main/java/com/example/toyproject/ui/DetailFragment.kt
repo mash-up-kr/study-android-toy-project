@@ -65,21 +65,36 @@ class DetailFragment : Fragment() {
         )
 
         Dlog.d("ownerName : $ownerName , repo : $repo")
+        loadData(ownerName, repo)
+
+    }
+
+    private fun loadData(ownerName: String, repo: String) {
+        //에러표시를 숨깁니다.
+        hideError()
+        //로딩화면을 보여줍니다.
+        showProgress()
+
+        //repo 데이터를 로딩합니다.
         loadRepoData(ownerName, repo)
+
+        //user 데이터 로딩을 합니다.
+        loadUserData(ownerName)
     }
 
     private fun loadRepoData(ownerName: String, repo: String) {
-        hideError()
-        showProgress()
-
         repoCall = repoApi.getRepository(ownerName, repo)
         repoCall?.enqueue(object : Callback<RepoModel> {
             override fun onResponse(call: Call<RepoModel>, response: Response<RepoModel>) {
+                //로딩 화면을 숨깁니다.
+                hideProgress()
+
                 val body = response.body()
                 if (response.isSuccessful && null != body) {
+                    //repo 데이터를 화면에 보여줍니다.
                     setRepoData(body.mapToView(requireContext()))
-                    loadUserData(ownerName)
                 } else {
+                    //에러를 표시합니다.
                     showError(response.message())
                 }
             }
@@ -108,12 +123,15 @@ class DetailFragment : Fragment() {
         userCall = userApi.getUser(userName)
         userCall?.enqueue(object : Callback<UserModel> {
             override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+                //로딩 화면을 숨깁니다.
                 hideProgress()
 
                 val body = response.body()
                 if (response.isSuccessful && null != body) {
+                    //user 데이터를 화면에 보여줍니다.
                     setUserData(body.mapToView(requireContext()))
                 } else {
+                    //에러를 표시합니다.
                     showError(response.message())
                 }
             }

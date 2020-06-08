@@ -90,13 +90,19 @@ class SearchFragment : Fragment() {
         Dlog.d("query : $query")
 
         if (query.isEmpty()) {
+            //토스트를 보여줍니다.
             requireContext().toast(requireContext().getString(R.string.please_write_repository_name))
         } else {
+            //키보드를 내립니다.
             hideKeyboard()
+            //이전 결과를 지웁니다.
             clearResults()
+            //에러표시를 숨깁니다.
             hideError()
+            //로딩화면을 보여줍니다.
             showProgress()
 
+            //서버로부터 검색된 리포지터리를 가져옵니다.
             repoCall = repoApi.searchRepository(query)
             repoCall?.enqueue(object : Callback<RepoSearchResponse> {
 
@@ -104,8 +110,10 @@ class SearchFragment : Fragment() {
                     call: Call<RepoSearchResponse>,
                     response: Response<RepoSearchResponse>
                 ) {
+                    //로딩화면을 숨깁니다.
                     hideProgress()
 
+                    //통신에 성공하면 검색된 리스트를 화면에 보여줍니다.
                     val body = response.body()
                     if (response.isSuccessful && null != body) {
                         with(repoAdapter) {
