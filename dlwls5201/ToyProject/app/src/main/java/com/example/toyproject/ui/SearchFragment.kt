@@ -167,8 +167,8 @@ class SearchFragment : Fragment() {
     }
 
     override fun onStop() {
-        super.onStop()
         repoCall?.cancel()
+        super.onStop()
     }
 
 }

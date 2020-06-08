@@ -172,8 +172,8 @@ class DetailFragment : Fragment() {
     }
 
     override fun onStop() {
-        super.onStop()
         repoCall?.cancel()
         userCall?.cancel()
+        super.onStop()
     }
 }
