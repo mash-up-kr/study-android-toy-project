@@ -4,8 +4,8 @@ import android.content.Context
 import android.text.TextUtils
 import com.example.toyproject.R
 import com.example.toyproject.ui.model.RepoItem
+import com.example.toyproject.utils.DateUtils
 import com.google.gson.annotations.SerializedName
-import java.text.SimpleDateFormat
 import java.util.*
 
 data class RepoModel(
@@ -32,10 +32,6 @@ data class RepoModel(
     )
 }
 
-private val dateFormatToShow = SimpleDateFormat(
-    "yyyy-MM-dd HH:mm:ss", Locale.getDefault()
-)
-
 fun RepoModel.mapToView(context: Context) = RepoItem(
     title = fullName,
     repoName = name,
@@ -55,7 +51,7 @@ fun RepoModel.mapToView(context: Context) = RepoItem(
         language,
 
     updatedAt = try {
-        dateFormatToShow.format(updatedAt)
+        DateUtils.dateFormatToShow.format(updatedAt)
     } catch (e: IllegalArgumentException) {
         context.resources.getString(R.string.unknown)
     },
