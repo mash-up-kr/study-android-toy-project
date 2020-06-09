@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MashUp ToyProject</string>
+
+    <string name="empty_search">Input something!</string>
+    <string name="no_language">No language in this Repository</string>
+    <string name="search_hint">Search..</string>
+    <string name="StringValue">image does not open</string>
+    <string name="no_internet">No Internet Connection!</string>
+    <string name="no_response">No Result</string>
+    <string name="view_repository">View repository</string>
+    <string name="follower">follower:</string>
+    <string name="following">following:</string>
+    <string name="description">Description</string>
+    <string name="language">Language</string>
+</resources>

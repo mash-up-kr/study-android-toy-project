@@ -1,0 +1,2 @@
+rootProject.name='MashUp ToyProject'
+include ':app'
