@@ -39,8 +39,7 @@ class ItemAdapter(private var items: ArrayList<GithubRepoData>) :
         return ViewHolder(inflatedView)
     }
 
-    class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        private var view = v
+    class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(listener: View.OnClickListener, item: GithubRepoData) {
             view.tv_recyclerview_item_FullName.text = item.fullName
             if (item.language == null) {
