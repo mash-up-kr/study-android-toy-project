@@ -16,15 +16,16 @@ import com.example.android_toy_project_study_2020_mvvm.ui.RepositoryDetailActivi
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 
-class ItemAdapter (private var items: ArrayList<GithubRepoData>) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter(private var items: ArrayList<GithubRepoData>) :
+    RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         val listener = View.OnClickListener {
-            val intent = Intent(it.context,RepositoryDetailActivity::class.java)
-            intent.putExtra(intentFullName,item.fullName)
+            val intent = Intent(it.context, RepositoryDetailActivity::class.java)
+            intent.putExtra(intentFullName, item.fullName)
             it.context.startActivity(intent)
         }
         holder.apply {
@@ -33,7 +34,8 @@ class ItemAdapter (private var items: ArrayList<GithubRepoData>) : RecyclerView.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
+        val inflatedView =
+            LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
         return ViewHolder(inflatedView)
     }
 
@@ -42,12 +44,14 @@ class ItemAdapter (private var items: ArrayList<GithubRepoData>) : RecyclerView.
         fun bind(listener: View.OnClickListener, item: GithubRepoData) {
             view.tv_recyclerview_item_FullName.text = item.fullName
             if (item.language == null) {
-                view.tv_recyclerview_item_Language.text = view.context.getString(R.string.no_language)
+                view.tv_recyclerview_item_Language.text =
+                    view.context.getString(R.string.no_language)
             } else {
                 view.tv_recyclerview_item_Language.text = item.language
             }
             view.setOnClickListener(listener)
-            Glide.with(view).load(item.owner.avatarUrl).into(view.iv_recyclerview_item_GitAvatarImage)
+            Glide.with(view).load(item.owner.avatarUrl)
+                .into(view.iv_recyclerview_item_GitAvatarImage)
         }
     }
 

@@ -15,15 +15,18 @@ import retrofit2.Response
 
 class MainActivityController(_mainActivity: Activity) {
     val mainActivity = _mainActivity
+
     init {
         mainActivity.rc_activity_main_Recycler.visibility = INVISIBLE
     }
+
     fun githubSearch(keyword: String) {
         RetrofitService.getService().requestGithubResponse(keyword = keyword)
             .enqueue(object : Callback<GithubResponseData> {
                 override fun onFailure(call: Call<GithubResponseData>, t: Throwable) {
                     mainActivity.tv_activity_main_Loading.visibility = INVISIBLE
-                    mainActivity.tv_activity_main_ErrorTextViewRepository.text = mainActivity.getString(R.string.error) + t.toString()
+                    mainActivity.tv_activity_main_ErrorTextViewRepository.text =
+                        mainActivity.getString(R.string.error) + t.toString()
                     mainActivity.tv_activity_main_ErrorTextViewRepository.visibility = VISIBLE
                     mainActivity.rc_activity_main_Recycler.visibility = INVISIBLE
                 }
@@ -40,8 +43,10 @@ class MainActivityController(_mainActivity: Activity) {
                         val list = ArrayList<GithubRepoData>()
                         if (githubResponseData != null) {
                             if (githubResponseData.items.isEmpty()) {
-                                mainActivity.tv_activity_main_ErrorTextViewRepository.text = mainActivity.getString(string.no_response)
-                                mainActivity.tv_activity_main_ErrorTextViewRepository.visibility = VISIBLE
+                                mainActivity.tv_activity_main_ErrorTextViewRepository.text =
+                                    mainActivity.getString(string.no_response)
+                                mainActivity.tv_activity_main_ErrorTextViewRepository.visibility =
+                                    VISIBLE
                                 mainActivity.rc_activity_main_Recycler.visibility = INVISIBLE
                             } else {
                                 githubResponseData.items.map {
@@ -53,7 +58,8 @@ class MainActivityController(_mainActivity: Activity) {
                             }
                         }
                     } else {
-                        mainActivity.tv_activity_main_ErrorTextViewRepository.text = mainActivity.getString(R.string.error)
+                        mainActivity.tv_activity_main_ErrorTextViewRepository.text =
+                            mainActivity.getString(R.string.error)
                         mainActivity.tv_activity_main_ErrorTextViewRepository.visibility = VISIBLE
                         mainActivity.rc_activity_main_Recycler.visibility = INVISIBLE
                     }
@@ -61,8 +67,9 @@ class MainActivityController(_mainActivity: Activity) {
 
             })
     }
-    fun loadingOnOffMainActivity(){
-        if (mainActivity.tv_activity_main_Loading.visibility == VISIBLE){
+
+    fun loadingOnOffMainActivity() {
+        if (mainActivity.tv_activity_main_Loading.visibility == VISIBLE) {
             mainActivity.tv_activity_main_Loading.visibility = INVISIBLE
         } else {
             mainActivity.tv_activity_main_Loading.visibility = VISIBLE

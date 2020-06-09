@@ -19,6 +19,6 @@ class RepositoryDetailActivity : AppCompatActivity() {
         val fullName = intent.getStringExtra(intentFullName)
         val userName = fullName.split("/")[0]
         val repoName = fullName.split("/")[1]
-        model.getRepository(userName,repoName)
+        model.getRepository(userName, repoName)
     }
 }
