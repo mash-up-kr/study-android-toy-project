@@ -28,9 +28,7 @@ class ItemAdapter(private var items: ArrayList<GithubRepoData>) :
             intent.putExtra(EXTRA_FULL_NAME, item.fullName)
             it.context.startActivity(intent)
         }
-        holder.apply {
-            bind(listener, item)
-        }
+        holder.bind(listener, item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
