@@ -10,11 +10,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.toyproject.R
 import com.example.toyproject.base.ext.toast
-import com.example.toyproject.data.api.ApiProvider
 import com.example.toyproject.data.base.BaseResponse
+import com.example.toyproject.data.injection.Injection
 import com.example.toyproject.data.model.RepoSearchResponse
 import com.example.toyproject.data.model.mapToPresentation
-import com.example.toyproject.repository.RepoRepositoryImpl
+import com.example.toyproject.repository.RepoRepository
 import com.example.toyproject.ui.adapter.RepositoryAdapter
 import com.example.toyproject.utils.AppUtils
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -37,10 +37,7 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private val repoRepository = RepoRepositoryImpl(
-        ApiProvider.provideRepoApi(),
-        ApiProvider.provideUserApi()
-    )
+    private val repoRepository: RepoRepository = Injection.provideRepoRepository()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

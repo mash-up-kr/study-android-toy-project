@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.toyproject.R
 import com.example.toyproject.base.util.Dlog
-import com.example.toyproject.data.api.ApiProvider
 import com.example.toyproject.data.base.BaseResponse
+import com.example.toyproject.data.injection.Injection
 import com.example.toyproject.data.model.RepoDetailModel
 import com.example.toyproject.data.model.mapToPresentation
-import com.example.toyproject.repository.RepoRepositoryImpl
+import com.example.toyproject.repository.RepoRepository
 import com.example.toyproject.ui.model.RepoDetailItem
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -35,10 +35,7 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private val repoRepository = RepoRepositoryImpl(
-        ApiProvider.provideRepoApi(),
-        ApiProvider.provideUserApi()
-    )
+    private val repoRepository: RepoRepository = Injection.provideRepoRepository()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
