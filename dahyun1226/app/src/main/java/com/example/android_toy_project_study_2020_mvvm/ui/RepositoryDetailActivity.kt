@@ -123,8 +123,8 @@ class RepositoryDetailActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        super.onStop()
         requestUser?.cancel()
         requestRepo?.cancel()
+        super.onStop()
     }
 }
