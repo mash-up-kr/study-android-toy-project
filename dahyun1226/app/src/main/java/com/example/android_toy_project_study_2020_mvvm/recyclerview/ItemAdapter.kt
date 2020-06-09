@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.android_toy_project_study_2020_mvvm.R
-import com.example.android_toy_project_study_2020_mvvm.api.RepositoryDetailActivityController.Companion.intentFullName
+import com.example.android_toy_project_study_2020_mvvm.api.RepositoryDetailActivityController.Companion.EXTRA_FULL_NAME
 import com.example.android_toy_project_study_2020_mvvm.data.GithubRepoData
 import com.example.android_toy_project_study_2020_mvvm.ui.RepositoryDetailActivity
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
@@ -25,7 +25,7 @@ class ItemAdapter(private var items: ArrayList<GithubRepoData>) :
         val item = items[position]
         val listener = View.OnClickListener {
             val intent = Intent(it.context, RepositoryDetailActivity::class.java)
-            intent.putExtra(intentFullName, item.fullName)
+            intent.putExtra(EXTRA_FULL_NAME, item.fullName)
             it.context.startActivity(intent)
         }
         holder.apply {

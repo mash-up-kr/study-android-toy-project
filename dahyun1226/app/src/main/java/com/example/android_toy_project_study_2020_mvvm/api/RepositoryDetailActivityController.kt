@@ -15,7 +15,7 @@ import retrofit2.Response
 
 class RepositoryDetailActivityController(_activity: Activity) {
     companion object {
-        const val intentFullName = "FullName"
+        const val EXTRA_FULL_NAME = "FullName"
     }
 
     val activity = _activity
