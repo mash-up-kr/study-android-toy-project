@@ -40,7 +40,6 @@ class MainActivityController(_mainActivity: Activity) {
                         mainActivity.tv_activity_main_ErrorTextViewRepository.visibility = INVISIBLE
                         val githubResponseData = response.body()
                         mainActivity.tv_activity_main_Loading.visibility = INVISIBLE
-                        val list = ArrayList<GithubRepoData>()
                         if (githubResponseData != null) {
                             if (githubResponseData.items.isEmpty()) {
                                 mainActivity.tv_activity_main_ErrorTextViewRepository.text =
@@ -49,10 +48,8 @@ class MainActivityController(_mainActivity: Activity) {
                                     VISIBLE
                                 mainActivity.rc_activity_main_Recycler.visibility = INVISIBLE
                             } else {
-                                githubResponseData.items.map {
-                                    list.add(it)
-                                }
-                                val adapter = ItemAdapter(list)
+                                val adapter =
+                                    ItemAdapter(githubResponseData.items as ArrayList<GithubRepoData>)
                                 mainActivity.rc_activity_main_Recycler.adapter = adapter
                                 mainActivity.rc_activity_main_Recycler.visibility = VISIBLE
                             }
