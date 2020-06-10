@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- https://learnui.design/blog/android-material-design-font-size-guidelines.html -->
+    <!-- text -->
+    <style name="BaseTextStyle" parent="android:TextAppearance" />
+
+    <style name="TextStyle.Large" parent="BaseTextStyle">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="TextStyle.Medium" parent="BaseTextStyle">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="TextStyle.Small" parent="BaseTextStyle">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="TextStyle.Button" parent="BaseTextStyle">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="TextStyle.EditText" parent="BaseTextStyle">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <!-- edit -->
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">7dp</item>
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">5dp</item>
+        <item name="android:textAppearance">@style/TextStyle.EditText</item>
+    </style>
+
+    <style name="EditTextStyle.NormalInputField">
+        <item name="singleLine">true</item>
+        <item name="android:textColorHint">@color/gray4</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+</resources>

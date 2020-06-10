@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="android:textAllCaps">true</item>
+        <item name="iconGravity">textStart</item>
+        <item name="android:textAppearance">@style/TextStyle.Medium</item>
+        <item name="iconPadding">8dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="rippleColor">@color/gray6</item>
+    </style>
+
+    <style name="ButtonStyle.Primary" parent="BaseButtonStyle">
+        <item name="android:minHeight">36dp</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
+</resources>

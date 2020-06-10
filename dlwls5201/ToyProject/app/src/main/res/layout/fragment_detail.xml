@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/padding_fragment_start"
+    android:paddingTop="@dimen/padding_fragment_top"
+    android:paddingEnd="@dimen/padding_fragment_end"
+    android:paddingBottom="@dimen/padding_fragment_bottom"
+    tools:context=".ui.DetailFragment">
+
+    <!-- user info -->
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/TextStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        android:maxLines="2"
+        app:layout_constraintBottom_toTopOf="@+id/tvStars"
+        app:layout_constraintStart_toEndOf="@+id/ivProfile"
+        app:layout_constraintTop_toTopOf="@+id/ivProfile"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="username/myrepository" />
+
+    <TextView
+        android:id="@+id/tvStars"
+        style="@style/TextStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:drawableStart="@drawable/ic_star_black"
+        app:layout_constraintBottom_toBottomOf="@+id/ivProfile"
+        app:layout_constraintStart_toEndOf="@+id/ivProfile"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        tools:text="100 Stars" />
+
+    <!-- follow -->
+    <TextView
+        android:id="@+id/tvFollowerName"
+        style="@style/TextStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/follower"
+        app:layout_constraintEnd_toStartOf="@+id/tvFollower"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
+
+    <TextView
+        android:id="@+id/tvFollower"
+        style="@style/TextStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFollowerName"
+        app:layout_constraintStart_toEndOf="@+id/tvFollowerName"
+        app:layout_constraintTop_toTopOf="@+id/tvFollowerName"
+        tools:text="100" />
+
+    <TextView
+        android:id="@+id/tvFollowingName"
+        style="@style/TextStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/following"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFollowerName"
+        app:layout_constraintStart_toEndOf="@+id/tvFollower"
+        app:layout_constraintTop_toTopOf="@+id/tvFollowerName" />
+
+    <TextView
+        android:id="@+id/tvFollowing"
+        style="@style/TextStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFollowerName"
+        app:layout_constraintStart_toEndOf="@+id/tvFollowingName"
+        app:layout_constraintTop_toTopOf="@+id/tvFollowerName"
+        tools:text="100" />
+
+    <!-- description -->
+    <RelativeLayout
+        android:id="@+id/rlDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFollowerName">
+
+        <ImageView
+            android:id="@+id/ivDescription"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_description_black"
+            android:tint="@color/gray1" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            tools:text="My Description" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvDescription"
+            android:layout_marginStart="60dp"
+            android:text="@string/description"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+    </RelativeLayout>
+
+    <!-- language -->
+    <RelativeLayout
+        android:id="@+id/rlLanguage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rlDescription">
+
+        <ImageView
+            android:id="@+id/ivLanguage"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_language_black"
+            android:tint="@color/gray1" />
+
+        <TextView
+            android:id="@+id/tvLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            tools:text="Kotlin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLanguage"
+            android:layout_marginStart="60dp"
+            android:text="@string/language"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+    </RelativeLayout>
+
+    <!-- message -->
+    <TextView
+        android:id="@+id/tvMessage"
+        style="@style/TextStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="message"
+        tools:visibility="visible" />
+
+    <!-- loading -->
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
