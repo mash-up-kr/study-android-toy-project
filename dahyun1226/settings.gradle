@@ -1,0 +1,2 @@
+rootProject.name='Android_Toy_Project_Study_2020_MVVM'
+include ':app'

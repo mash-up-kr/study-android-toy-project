@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Android_Toy_Project_Study_2020_MVVM</string>
+    <string name="error">에러발생!!!  </string>
+    <string name="no_response">결과 없음!!!  </string>
+    <string name="followers">Followers</string>
+    <string name="followings">Followings</string>
+    <string name="put_contents">검색 내용을 넣어주세요!  </string>
+    <string name="no_language">No language specified</string>
+    <string name="stars">Stars</string>
+    <string name="loading">Loading...</string>
+    <string name="search">Search..</string>
+    <string name="view_repository">View Repository</string>
+</resources>

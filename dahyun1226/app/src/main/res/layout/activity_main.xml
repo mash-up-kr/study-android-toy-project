@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent">
+
+        <Button
+            android:id="@+id/bt_activity_main_BackButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/abc_vector_test" />
+
+        <EditText
+            android:id="@+id/et_activity_main_Search"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/search"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/bt_activity_main_SearchButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:drawable/ic_menu_search" />
+    </androidx.appcompat.widget.Toolbar>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_activity_main_Recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/tv_activity_main_ErrorTextViewRepository"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tv_activity_main_Loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="280dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="@string/loading"
+                android:textColor="@android:color/background_light"
+                android:textSize="50sp"
+                android:visibility="invisible" />
+        </FrameLayout>
+
+</LinearLayout>
