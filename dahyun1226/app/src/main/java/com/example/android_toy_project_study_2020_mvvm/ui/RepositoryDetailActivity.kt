@@ -111,8 +111,4 @@ class RepositoryDetailActivity : AppCompatActivity() {
     fun layoutInvisible() {
         ll_activity_repository_detail_Layout.visibility = View.INVISIBLE
     }
-
-    override fun onStop() {
-        super.onStop()
-    }
 }

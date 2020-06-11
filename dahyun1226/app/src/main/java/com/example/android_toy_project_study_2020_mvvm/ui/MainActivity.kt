@@ -97,10 +97,5 @@ class MainActivity : AppCompatActivity() {
     fun errorInvisible() {
         tv_activity_main_ErrorTextViewRepository.visibility = INVISIBLE
     }
-
-    override fun onStop() {
-        //GitRepository.requestGithubResponseData.
-        super.onStop()
-    }
 }
 
