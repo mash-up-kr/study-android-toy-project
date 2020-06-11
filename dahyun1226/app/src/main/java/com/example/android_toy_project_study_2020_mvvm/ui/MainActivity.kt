@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        GitRepository.requestGithubResponseData.cancel()
+        //GitRepository.requestGithubResponseData.
         super.onStop()
     }
 }

@@ -134,8 +134,8 @@ class RepositoryDetailActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        GitRepository.requestGithubDetailRepoData.cancel()
-        GitRepository.requestGithubDetailUserData.cancel()
+        //GitRepository.requestGithubDetailRepoData.cancel()
+        //GitRepository.requestGithubDetailUserData.cancel()
         super.onStop()
     }
 }

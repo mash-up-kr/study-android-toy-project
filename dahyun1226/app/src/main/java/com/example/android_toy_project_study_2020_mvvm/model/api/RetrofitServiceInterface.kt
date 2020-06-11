@@ -4,7 +4,6 @@ import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailRe
 import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailUserData
 import com.example.android_toy_project_study_2020_mvvm.model.data.GithubResponseData
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
