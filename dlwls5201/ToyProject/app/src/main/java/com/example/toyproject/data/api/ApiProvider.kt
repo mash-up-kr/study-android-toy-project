@@ -3,6 +3,7 @@ package com.example.toyproject.data.api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -17,6 +18,8 @@ object ApiProvider {
     private fun getRetrofitBuild() = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(getOkhttpClient())
+        // 받은 응답을 옵서버블 형태로 변환해 줍니다.
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
         .addConverterFactory(getGsonConverter())
         .build()
 
