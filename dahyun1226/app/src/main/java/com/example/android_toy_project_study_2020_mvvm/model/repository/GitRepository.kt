@@ -10,11 +10,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object GitRepository {
-    lateinit var request: Call<GithubResponseData>
+    lateinit var requestGithubResponseData: Call<GithubResponseData>
     fun githubSearch(keyword: String, callback: BaseResponse<GithubResponseData>) {
         callback.onLoading()
-        request = RetrofitService.getService().requestGithubResponse(keyword = keyword)
-        request!!.enqueue(object : Callback<GithubResponseData> {
+        requestGithubResponseData = RetrofitService.getService().requestGithubResponse(keyword = keyword)
+        requestGithubResponseData!!.enqueue(object : Callback<GithubResponseData> {
             override fun onFailure(call: Call<GithubResponseData>, t: Throwable) {
                 callback.onError(t)
             }
