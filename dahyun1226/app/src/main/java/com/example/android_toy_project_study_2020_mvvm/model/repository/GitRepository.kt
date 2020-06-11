@@ -9,6 +9,7 @@ import com.example.android_toy_project_study_2020_mvvm.model.data.GithubResponse
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
@@ -22,11 +23,11 @@ object GitRepository {
     lateinit var requestGithubDetailRepoData: Observable<GithubDetailRepoData>
     lateinit var requestGithubDetailUserData: Observable<GithubDetailUserData>
 
-    fun githubSearch(keyword: String, callback: BaseResponse<GithubResponseData>) {
+    fun githubSearch(keyword: String, callback: BaseResponse<GithubResponseData>): Disposable {
         callback.onLoading()
         requestGithubResponseData =
             RetrofitService.getService().requestGithubResponse(keyword = keyword)
-        requestGithubResponseData
+        return requestGithubResponseData
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -41,7 +42,7 @@ object GitRepository {
         userName: String,
         repoName: String,
         callback: BaseResponse<GithubDetailData>
-    ) {
+    ): Disposable {
         callback.onLoading()
         requestGithubDetailRepoData =
             RetrofitService.getService().requestGetRepository(userName, repoName)
@@ -52,7 +53,7 @@ object GitRepository {
         val secondRequest = requestGithubDetailUserData
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-        Observable.zip(
+        return Observable.zip(
             firstRequest,
             secondRequest,
             BiFunction { a: GithubDetailRepoData, b: GithubDetailUserData ->

@@ -13,6 +13,7 @@ import com.example.android_toy_project_study_2020_mvvm.model.data.GithubRepoData
 import com.example.android_toy_project_study_2020_mvvm.model.data.GithubResponseData
 import com.example.android_toy_project_study_2020_mvvm.model.repository.GitRepository
 import com.example.android_toy_project_study_2020_mvvm.ui.recyclerview.ItemAdapter
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,6 +21,7 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +68,9 @@ class MainActivity : AppCompatActivity() {
                             recyclerVisible()
                             errorInvisible()
                         }
-                    })
+                    }).also {
+                    compositeDisposable.add(it)
+                }
             }
         }
         recyclerInvisible()
@@ -96,6 +100,11 @@ class MainActivity : AppCompatActivity() {
 
     fun errorInvisible() {
         tv_activity_main_ErrorTextViewRepository.visibility = INVISIBLE
+    }
+
+    override fun onStop() {
+        compositeDisposable.dispose()
+        super.onStop()
     }
 }
 

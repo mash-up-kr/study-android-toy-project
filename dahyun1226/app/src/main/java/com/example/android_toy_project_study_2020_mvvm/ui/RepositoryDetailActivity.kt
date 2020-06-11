@@ -12,6 +12,7 @@ import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailRe
 import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailUserData
 import com.example.android_toy_project_study_2020_mvvm.model.repository.GitRepository
 import kotlinx.android.synthetic.main.activity_view_repository_detail.*
+import io.reactivex.disposables.CompositeDisposable
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +21,8 @@ class RepositoryDetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_FULL_NAME = "FullName"
     }
+
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +86,9 @@ class RepositoryDetailActivity : AppCompatActivity() {
                     errorInvisible()
                     layoutVisible()
                 }
-            })
+            }).also {
+            compositeDisposable.add(it)
+        }
     }
 
     fun loadingVisible() {
@@ -110,5 +115,10 @@ class RepositoryDetailActivity : AppCompatActivity() {
 
     fun layoutInvisible() {
         ll_activity_repository_detail_Layout.visibility = View.INVISIBLE
+    }
+
+    override fun onStop() {
+        compositeDisposable.dispose()
+        super.onStop()
     }
 }
