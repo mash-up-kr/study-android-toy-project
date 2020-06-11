@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
 import com.example.android_toy_project_study_2020_mvvm.R
+import com.example.android_toy_project_study_2020_mvvm.model.BaseResponse
 import com.example.android_toy_project_study_2020_mvvm.model.api.RetrofitService
 import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailRepoData
 import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailUserData
+import com.example.android_toy_project_study_2020_mvvm.model.repository.GitRepository
 import kotlinx.android.synthetic.main.activity_view_repository_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,9 +19,6 @@ class RepositoryDetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_FULL_NAME = "FullName"
     }
-
-    private var requestUser: Call<GithubDetailUserData>? = null
-    private var requestRepo: Call<GithubDetailRepoData>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,66 +32,79 @@ class RepositoryDetailActivity : AppCompatActivity() {
         loadingVisible()
         errorInvisible()
         layoutInvisible()
-        getRepository(userName, repoName)
-    }
-
-    fun getRepository(userName: String, repoName: String) {
-        requestRepo = RetrofitService.getService().requestGetRepository(userName, repoName)
-        requestRepo!!.enqueue(object : Callback<GithubDetailRepoData> {
-            override fun onFailure(call: Call<GithubDetailRepoData>, t: Throwable) {
-                loadingInvisible()
-                errorVisible(t.toString())
-            }
-
-            override fun onResponse(
-                call: Call<GithubDetailRepoData>,
-                response: Response<GithubDetailRepoData>
-            ) {
-                val repoData = response.body()
-                if (repoData != null) {
-                    Glide.with(this@RepositoryDetailActivity).load(repoData.owner.avatarUrl)
+        GitRepository.getDetailRepository(
+            userName,
+            repoName,
+            object : BaseResponse<GithubDetailRepoData> {
+                override fun onSuccess(data: GithubDetailRepoData) {
+                    Glide.with(this@RepositoryDetailActivity).load(data.owner.avatarUrl)
                         .into(iv_activity_repository_detail_GitAvatarImage)
-                    tv_activity_repository_detail_FullName.text = repoData.fullName
+                    tv_activity_repository_detail_FullName.text = data.fullName
                     tv_activity_repository_detail_Stars.text =
-                        repoData.stargazersCount.toString() + getString(R.string.stars)
+                        data.stargazersCount.toString() + getString(R.string.stars)
                     tv_activity_repository_detail_Description.text =
-                        repoData.description
-                    if (repoData.language == null) {
+                        data.description
+                    if (data.language == null) {
                         tv_activity_repository_detail_Language.text =
                             getString(R.string.no_language)
                     } else {
-                        tv_activity_repository_detail_Language.text = repoData.language
+                        tv_activity_repository_detail_Language.text = data.language
                     }
-                }
-                getSingleUser(userName)
-            }
-        })
-    }
+                    GitRepository.getSingleUser(
+                        userName,
+                        object : BaseResponse<GithubDetailUserData> {
+                            override fun onSuccess(data: GithubDetailUserData) {
+                                tv_activity_repository_detail_followersAndFollowing.text =
+                                    getString(R.string.followers) +
+                                            " : " + data.followers.toString() +
+                                            " , " + getString(R.string.followers) +
+                                            " : " + data.following.toString()
+                                loadingInvisible()
+                                layoutVisible()
+                            }
 
-    fun getSingleUser(userName: String) {
-        requestUser = RetrofitService.getService().requestSingleUser(userName)
-        requestUser!!.enqueue(object : Callback<GithubDetailUserData> {
-            override fun onFailure(call: Call<GithubDetailUserData>, t: Throwable) {
-                loadingInvisible()
-                errorVisible(t.toString())
-            }
+                            override fun onFail(description: Int) {
+                                loadingInvisible()
+                                errorVisible(getString(description))
+                            }
 
-            override fun onResponse(
-                call: Call<GithubDetailUserData>,
-                response: Response<GithubDetailUserData>
-            ) {
-                val userData = response.body()
-                if (userData != null) {
-                    tv_activity_repository_detail_followersAndFollowing.text =
-                        getString(R.string.followers) +
-                                " : " + userData.followers.toString() +
-                                " , " + getString(R.string.followers) +
-                                " : " + userData.following.toString()
+                            override fun onError(throwable: Throwable) {
+                                loadingInvisible()
+                                errorVisible(throwable.toString())
+                            }
+
+                            override fun onLoading() {
+                                loadingVisible()
+                                errorInvisible()
+                            }
+
+                            override fun onLoaded() {
+                                loadingInvisible()
+                                errorInvisible()
+                            }
+                        })
                 }
-                loadingInvisible()
-                layoutVisible()
-            }
-        })
+
+                override fun onFail(description: Int) {
+                    loadingInvisible()
+                    errorVisible(getString(description))
+                }
+
+                override fun onError(throwable: Throwable) {
+                    loadingInvisible()
+                    errorVisible(throwable.toString())
+                }
+
+                override fun onLoading() {
+                    loadingVisible()
+                    errorInvisible()
+                }
+
+                override fun onLoaded() {
+                    loadingInvisible()
+                    errorInvisible()
+                }
+            })
     }
 
     fun loadingVisible() {
@@ -122,8 +134,8 @@ class RepositoryDetailActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        requestUser?.cancel()
-        requestRepo?.cancel()
+        GitRepository.requestGithubDetailRepoData.cancel()
+        GitRepository.requestGithubDetailUserData.cancel()
         super.onStop()
     }
 }

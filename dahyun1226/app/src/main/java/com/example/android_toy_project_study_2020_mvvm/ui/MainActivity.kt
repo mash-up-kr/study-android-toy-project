@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity() {
                             recyclerVisible()
                             errorInvisible()
                         }
-
                     })
             }
         }
