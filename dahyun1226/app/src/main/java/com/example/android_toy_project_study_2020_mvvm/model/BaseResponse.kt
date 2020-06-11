@@ -4,7 +4,7 @@ interface BaseResponse<T> {
 
     fun onSuccess(data: T)
 
-    fun onFail(description: String)
+    fun onFail(description: Int)
 
     fun onError(throwable: Throwable)
 

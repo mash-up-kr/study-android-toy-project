@@ -1,14 +1,17 @@
 package com.example.android_toy_project_study_2020_mvvm.ui
 
+import android.os.BadParcelableException
 import android.os.Bundle
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android_toy_project_study_2020_mvvm.R
+import com.example.android_toy_project_study_2020_mvvm.model.BaseResponse
 import com.example.android_toy_project_study_2020_mvvm.model.api.RetrofitService
 import com.example.android_toy_project_study_2020_mvvm.model.data.GithubRepoData
 import com.example.android_toy_project_study_2020_mvvm.model.data.GithubResponseData
+import com.example.android_toy_project_study_2020_mvvm.model.repository.GitRepository
 import com.example.android_toy_project_study_2020_mvvm.ui.recyclerview.ItemAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -17,7 +20,6 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
-    private var request: Call<GithubResponseData>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,47 +29,48 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.put_contents), Toast.LENGTH_SHORT).show()
             } else {
                 loadingVisible()
-                githubSearch(et_activity_main_Search.text.toString())
+                GitRepository.githubSearch(et_activity_main_Search.text.toString(),
+                    object : BaseResponse<GithubResponseData> {
+                        override fun onSuccess(data: GithubResponseData) {
+                            if (data.totalCount == 0) {
+                                loadingInvisible()
+                                recyclerInvisible()
+                                errorVisible(getString(R.string.no_response))
+                            } else {
+                                recyclerVisible()
+                                rc_activity_main_Recycler.adapter =
+                                    ItemAdapter(data.items as ArrayList<GithubRepoData>)
+                            }
+                        }
+
+                        override fun onFail(description: Int) {
+                            loadingInvisible()
+                            recyclerInvisible()
+                            errorVisible(getString(description))
+                        }
+
+                        override fun onError(throwable: Throwable) {
+                            loadingInvisible()
+                            recyclerInvisible()
+                            errorVisible(throwable.toString())
+                        }
+
+                        override fun onLoading() {
+                            recyclerInvisible()
+                            loadingVisible()
+                            errorInvisible()
+                        }
+
+                        override fun onLoaded() {
+                            loadingInvisible()
+                            recyclerVisible()
+                            errorInvisible()
+                        }
+
+                    })
             }
         }
         recyclerInvisible()
-    }
-
-    private fun githubSearch(keyword: String) {
-        request = RetrofitService.getService().requestGithubResponse(keyword = keyword)
-        request!!.enqueue(object : Callback<GithubResponseData> {
-            override fun onFailure(call: Call<GithubResponseData>, t: Throwable) {
-                loadingInvisible()
-                errorVisible(t.toString())
-                recyclerInvisible()
-            }
-
-            override fun onResponse(
-                call: Call<GithubResponseData>,
-                response: Response<GithubResponseData>
-            ) {
-                if (response.isSuccessful) {
-                    loadingInvisible()
-                    errorInvisible()
-                    val githubResponseData = response.body()
-                    if (githubResponseData != null) {
-                        if (githubResponseData.items.isEmpty()) {
-                            errorVisible(getString(R.string.no_response))
-                            recyclerInvisible()
-                        } else {
-                            val adapter =
-                                ItemAdapter(githubResponseData.items as ArrayList<GithubRepoData>)
-                            rc_activity_main_Recycler.adapter = adapter
-                            recyclerVisible()
-                        }
-                    }
-                } else {
-                    recyclerInvisible()
-                    errorVisible(getString(R.string.no_response))
-                }
-            }
-
-        })
     }
 
     fun loadingVisible() {
@@ -97,7 +100,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        request?.cancel()
+        GitRepository.request.cancel()
         super.onStop()
     }
 }
