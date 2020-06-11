@@ -17,6 +17,7 @@ import com.example.toyproject.data.model.mapToPresentation
 import com.example.toyproject.repository.RepoRepository
 import com.example.toyproject.ui.adapter.RepositoryAdapter
 import com.example.toyproject.utils.AppUtils
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment() {
@@ -38,6 +39,8 @@ class SearchFragment : Fragment() {
     }
 
     private val repoRepository: RepoRepository = Injection.provideRepoRepository()
+
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -116,7 +119,9 @@ class SearchFragment : Fragment() {
                     hideProgress()
                 }
 
-            })
+            }).also {
+                compositeDisposable.add(it)
+            }
         }
     }
 
@@ -148,5 +153,10 @@ class SearchFragment : Fragment() {
             text = ""
             visibility = View.GONE
         }
+    }
+
+    override fun onStop() {
+        compositeDisposable.dispose()
+        super.onStop()
     }
 }

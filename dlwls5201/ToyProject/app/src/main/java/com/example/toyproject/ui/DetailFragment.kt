@@ -17,6 +17,7 @@ import com.example.toyproject.data.model.RepoDetailModel
 import com.example.toyproject.data.model.mapToPresentation
 import com.example.toyproject.repository.RepoRepository
 import com.example.toyproject.ui.model.RepoDetailItem
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment : Fragment() {
@@ -36,6 +37,8 @@ class DetailFragment : Fragment() {
     }
 
     private val repoRepository: RepoRepository = Injection.provideRepoRepository()
+
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,7 +86,9 @@ class DetailFragment : Fragment() {
             override fun onLoaded() {
                 hideProgress()
             }
-        })
+        }).also {
+            compositeDisposable.add(it)
+        }
     }
 
     private fun setRepoDetailData(repoDetailItem: RepoDetailItem) {
@@ -123,5 +128,10 @@ class DetailFragment : Fragment() {
 
     private fun hideProgress() {
         pbLoading.visibility = View.GONE
+    }
+
+    override fun onStop() {
+        compositeDisposable.dispose()
+        super.onStop()
     }
 }
