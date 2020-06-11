@@ -6,10 +6,10 @@ import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android_toy_project_study_2020_mvvm.R
-import com.example.android_toy_project_study_2020_mvvm.api.RetrofitService
-import com.example.android_toy_project_study_2020_mvvm.data.GithubRepoData
-import com.example.android_toy_project_study_2020_mvvm.data.GithubResponseData
-import com.example.android_toy_project_study_2020_mvvm.recyclerview.ItemAdapter
+import com.example.android_toy_project_study_2020_mvvm.model.api.RetrofitService
+import com.example.android_toy_project_study_2020_mvvm.model.data.GithubRepoData
+import com.example.android_toy_project_study_2020_mvvm.model.data.GithubResponseData
+import com.example.android_toy_project_study_2020_mvvm.ui.recyclerview.ItemAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback

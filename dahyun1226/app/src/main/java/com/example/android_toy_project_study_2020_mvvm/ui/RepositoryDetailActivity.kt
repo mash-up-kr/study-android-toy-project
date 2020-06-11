@@ -5,10 +5,9 @@ import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
 import com.example.android_toy_project_study_2020_mvvm.R
-import com.example.android_toy_project_study_2020_mvvm.api.RetrofitService
-import com.example.android_toy_project_study_2020_mvvm.data.GithubDetailRepoData
-import com.example.android_toy_project_study_2020_mvvm.data.GithubDetailUserData
-import com.example.android_toy_project_study_2020_mvvm.data.GithubResponseData
+import com.example.android_toy_project_study_2020_mvvm.model.api.RetrofitService
+import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailRepoData
+import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailUserData
 import kotlinx.android.synthetic.main.activity_view_repository_detail.*
 import retrofit2.Call
 import retrofit2.Callback

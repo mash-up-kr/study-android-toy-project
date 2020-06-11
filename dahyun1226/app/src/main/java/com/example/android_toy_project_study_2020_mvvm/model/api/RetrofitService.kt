@@ -1,4 +1,4 @@
-package com.example.android_toy_project_study_2020_mvvm.api
+package com.example.android_toy_project_study_2020_mvvm.model.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
