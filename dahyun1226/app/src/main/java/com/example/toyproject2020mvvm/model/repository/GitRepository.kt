@@ -13,15 +13,12 @@ import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
 object GitRepository : GitRepositoryInterface {
-    lateinit var requestGithubResponseData: Single<GithubResponseData>
-    lateinit var requestGithubDetailRepoData: Single<GithubDetailRepoData>
-    lateinit var requestGithubDetailUserData: Single<GithubDetailUserData>
 
     override fun githubSearch(
         keyword: String,
         callback: BaseResponse<GithubResponseData>
     ): Disposable {
-        requestGithubResponseData =
+        val requestGithubResponseData =
             RetrofitService.getService().requestGithubResponse(keyword = keyword)
         return requestGithubResponseData
             .doOnSubscribe { callback.onLoading() }
@@ -40,9 +37,9 @@ object GitRepository : GitRepositoryInterface {
         repoName: String,
         callback: BaseResponse<GithubDetailData>
     ): Disposable {
-        requestGithubDetailRepoData =
+        val requestGithubDetailRepoData =
             RetrofitService.getService().requestGetRepository(userName, repoName)
-        requestGithubDetailUserData = RetrofitService.getService().requestSingleUser(userName)
+        val requestGithubDetailUserData = RetrofitService.getService().requestSingleUser(userName)
         return Single.zip(
             requestGithubDetailRepoData,
             requestGithubDetailUserData,
