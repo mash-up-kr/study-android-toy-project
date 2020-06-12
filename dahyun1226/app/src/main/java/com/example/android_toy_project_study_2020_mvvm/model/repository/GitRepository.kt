@@ -19,9 +19,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object GitRepository {
-    lateinit var requestGithubResponseData: Observable<GithubResponseData>
-    lateinit var requestGithubDetailRepoData: Observable<GithubDetailRepoData>
-    lateinit var requestGithubDetailUserData: Observable<GithubDetailUserData>
+    lateinit var requestGithubResponseData: Single<GithubResponseData>
+    lateinit var requestGithubDetailRepoData: Single<GithubDetailRepoData>
+    lateinit var requestGithubDetailUserData: Single<GithubDetailUserData>
 
     fun githubSearch(keyword: String, callback: BaseResponse<GithubResponseData>): Disposable {
         callback.onLoading()
@@ -53,7 +53,7 @@ object GitRepository {
         val secondRequest = requestGithubDetailUserData
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-        return Observable.zip(
+        return Single.zip(
             firstRequest,
             secondRequest,
             BiFunction { a: GithubDetailRepoData, b: GithubDetailUserData ->

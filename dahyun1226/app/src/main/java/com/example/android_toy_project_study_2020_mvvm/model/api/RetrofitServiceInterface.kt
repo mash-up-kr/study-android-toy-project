@@ -15,16 +15,16 @@ interface RetrofitServiceInterface {
     fun requestGithubResponse(
         @Query("q") keyword: String,
         @Query("page") page: Int = 0
-    ): Observable<GithubResponseData>
+    ): Single<GithubResponseData>
 
     @GET("/repos/{userName}/{repoName}")
     fun requestGetRepository(
         @Path("userName") userName: String,
         @Path("repoName") repoName: String
-    ): Observable<GithubDetailRepoData>
+    ): Single<GithubDetailRepoData>
 
     @GET("/users/{userName}")
     fun requestSingleUser(
         @Path("userName") userName: String
-    ): Observable<GithubDetailUserData>
+    ): Single<GithubDetailUserData>
 }
