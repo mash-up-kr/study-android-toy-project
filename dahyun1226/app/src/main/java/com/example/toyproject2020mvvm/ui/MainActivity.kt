@@ -39,12 +39,6 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
 
-                        override fun onFail(description: Int) {
-                            loadingInvisible()
-                            recyclerInvisible()
-                            errorVisible(getString(description))
-                        }
-
                         override fun onError(throwable: Throwable) {
                             loadingInvisible()
                             recyclerInvisible()

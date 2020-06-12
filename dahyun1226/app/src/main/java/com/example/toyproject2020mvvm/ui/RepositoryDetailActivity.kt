@@ -57,12 +57,6 @@ class RepositoryDetailActivity : AppCompatActivity() {
                                 " : " + data.githubDetailUserData.following.toString()
                 }
 
-                override fun onFail(description: Int) {
-                    loadingInvisible()
-                    errorVisible(getString(description))
-                    layoutInvisible()
-                }
-
                 override fun onError(throwable: Throwable) {
                     loadingInvisible()
                     errorVisible(throwable.toString())
