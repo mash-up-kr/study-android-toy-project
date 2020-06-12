@@ -8,6 +8,8 @@ import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.model.BaseResponse
 import com.example.toyproject2020mvvm.model.data.GithubDetailData
 import com.example.toyproject2020mvvm.model.repository.GitRepository
+import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
+import com.example.toyproject2020mvvm.util.GitRepositoryInjector
 import kotlinx.android.synthetic.main.activity_view_repository_detail.*
 import io.reactivex.disposables.CompositeDisposable
 
@@ -15,6 +17,8 @@ class RepositoryDetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_FULL_NAME = "FullName"
     }
+
+    private val repository: GitRepositoryInterface = GitRepositoryInjector.provideGitRepository()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -30,7 +34,7 @@ class RepositoryDetailActivity : AppCompatActivity() {
         loadingVisible()
         errorInvisible()
         layoutInvisible()
-        GitRepository.getDetailRepository(
+        repository.getDetailRepository(
             userName,
             repoName,
             object : BaseResponse<GithubDetailData> {

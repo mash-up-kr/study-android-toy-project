@@ -2,6 +2,7 @@ package com.example.toyproject2020mvvm.model.repository
 
 import com.example.toyproject2020mvvm.model.BaseResponse
 import com.example.toyproject2020mvvm.model.api.RetrofitService
+import com.example.toyproject2020mvvm.model.api.RetrofitServiceInterface
 import com.example.toyproject2020mvvm.model.data.GithubDetailData
 import com.example.toyproject2020mvvm.model.data.GithubDetailRepoData
 import com.example.toyproject2020mvvm.model.data.GithubDetailUserData
@@ -12,15 +13,15 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
-object GitRepository : GitRepositoryInterface {
+class GitRepository(
+    private val api: RetrofitServiceInterface
+) : GitRepositoryInterface {
 
     override fun githubSearch(
         keyword: String,
         callback: BaseResponse<GithubResponseData>
     ): Disposable {
-        val requestGithubResponseData =
-            RetrofitService.getService().requestGithubResponse(keyword = keyword)
-        return requestGithubResponseData
+        return api.requestGithubResponse(keyword)
             .doOnSubscribe { callback.onLoading() }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -37,12 +38,9 @@ object GitRepository : GitRepositoryInterface {
         repoName: String,
         callback: BaseResponse<GithubDetailData>
     ): Disposable {
-        val requestGithubDetailRepoData =
-            RetrofitService.getService().requestGetRepository(userName, repoName)
-        val requestGithubDetailUserData = RetrofitService.getService().requestSingleUser(userName)
         return Single.zip(
-            requestGithubDetailRepoData,
-            requestGithubDetailUserData,
+            api.requestGetRepository(userName, repoName),
+            api.requestSingleUser(userName),
             BiFunction { a: GithubDetailRepoData, b: GithubDetailUserData ->
                 (GithubDetailData(a, b))
             })

@@ -10,12 +10,16 @@ import com.example.toyproject2020mvvm.model.BaseResponse
 import com.example.toyproject2020mvvm.model.data.GithubRepoData
 import com.example.toyproject2020mvvm.model.data.GithubResponseData
 import com.example.toyproject2020mvvm.model.repository.GitRepository
+import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
 import com.example.toyproject2020mvvm.ui.recyclerview.ItemAdapter
+import com.example.toyproject2020mvvm.util.GitRepositoryInjector
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val compositeDisposable = CompositeDisposable()
+
+    private val repository: GitRepositoryInterface = GitRepositoryInjector.provideGitRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.put_contents), Toast.LENGTH_SHORT).show()
             } else {
                 loadingVisible()
-                GitRepository.githubSearch(et_activity_main_Search.text.toString(),
+                repository.githubSearch(et_activity_main_Search.text.toString(),
                     object : BaseResponse<GithubResponseData> {
                         override fun onSuccess(data: GithubResponseData) {
                             if (data.totalCount == 0) {
