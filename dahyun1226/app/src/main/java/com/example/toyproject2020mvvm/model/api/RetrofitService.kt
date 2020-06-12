@@ -1,4 +1,4 @@
-package com.example.android_toy_project_study_2020_mvvm.model.api
+package com.example.toyproject2020mvvm.model.api
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

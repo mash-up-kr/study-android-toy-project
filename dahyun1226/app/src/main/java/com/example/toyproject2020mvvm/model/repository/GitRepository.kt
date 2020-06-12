@@ -1,22 +1,16 @@
-package com.example.android_toy_project_study_2020_mvvm.model.repository
+package com.example.toyproject2020mvvm.model.repository
 
-import com.example.android_toy_project_study_2020_mvvm.model.BaseResponse
-import com.example.android_toy_project_study_2020_mvvm.model.api.RetrofitService
-import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailData
-import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailRepoData
-import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailUserData
-import com.example.android_toy_project_study_2020_mvvm.model.data.GithubResponseData
-import io.reactivex.Observable
+import com.example.toyproject2020mvvm.model.BaseResponse
+import com.example.toyproject2020mvvm.model.api.RetrofitService
+import com.example.toyproject2020mvvm.model.data.GithubDetailData
+import com.example.toyproject2020mvvm.model.data.GithubDetailRepoData
+import com.example.toyproject2020mvvm.model.data.GithubDetailUserData
+import com.example.toyproject2020mvvm.model.data.GithubResponseData
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
-
-import kotlinx.android.synthetic.main.activity_view_repository_detail.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 object GitRepository {
     lateinit var requestGithubResponseData: Single<GithubResponseData>

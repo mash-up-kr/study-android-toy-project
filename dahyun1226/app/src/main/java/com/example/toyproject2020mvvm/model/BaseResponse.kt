@@ -1,4 +1,4 @@
-package com.example.android_toy_project_study_2020_mvvm.model
+package com.example.toyproject2020mvvm.model
 
 interface BaseResponse<T> {
 

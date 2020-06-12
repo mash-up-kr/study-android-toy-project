@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.RepositoryDetailActivity">
+    tools:context="com.example.toyproject2020mvvm.ui.RepositoryDetailActivity">
 
     <ImageView
         android:id="@+id/iv_recyclerview_item_GitAvatarImage"

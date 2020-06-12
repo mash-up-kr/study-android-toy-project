@@ -1,21 +1,15 @@
-package com.example.android_toy_project_study_2020_mvvm.ui
+package com.example.toyproject2020mvvm.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
-import com.example.android_toy_project_study_2020_mvvm.R
-import com.example.android_toy_project_study_2020_mvvm.model.BaseResponse
-import com.example.android_toy_project_study_2020_mvvm.model.api.RetrofitService
-import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailData
-import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailRepoData
-import com.example.android_toy_project_study_2020_mvvm.model.data.GithubDetailUserData
-import com.example.android_toy_project_study_2020_mvvm.model.repository.GitRepository
+import com.example.toyproject2020mvvm.R
+import com.example.toyproject2020mvvm.model.BaseResponse
+import com.example.toyproject2020mvvm.model.data.GithubDetailData
+import com.example.toyproject2020mvvm.model.repository.GitRepository
 import kotlinx.android.synthetic.main.activity_view_repository_detail.*
 import io.reactivex.disposables.CompositeDisposable
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class RepositoryDetailActivity : AppCompatActivity() {
     companion object {

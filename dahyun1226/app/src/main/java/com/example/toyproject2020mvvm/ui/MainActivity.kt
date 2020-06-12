@@ -1,24 +1,18 @@
-package com.example.android_toy_project_study_2020_mvvm.ui
+package com.example.toyproject2020mvvm.ui
 
-import android.os.BadParcelableException
 import android.os.Bundle
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.android_toy_project_study_2020_mvvm.R
-import com.example.android_toy_project_study_2020_mvvm.model.BaseResponse
-import com.example.android_toy_project_study_2020_mvvm.model.api.RetrofitService
-import com.example.android_toy_project_study_2020_mvvm.model.data.GithubRepoData
-import com.example.android_toy_project_study_2020_mvvm.model.data.GithubResponseData
-import com.example.android_toy_project_study_2020_mvvm.model.repository.GitRepository
-import com.example.android_toy_project_study_2020_mvvm.ui.recyclerview.ItemAdapter
+import com.example.toyproject2020mvvm.R
+import com.example.toyproject2020mvvm.model.BaseResponse
+import com.example.toyproject2020mvvm.model.data.GithubRepoData
+import com.example.toyproject2020mvvm.model.data.GithubResponseData
+import com.example.toyproject2020mvvm.model.repository.GitRepository
+import com.example.toyproject2020mvvm.ui.recyclerview.ItemAdapter
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
 
 class MainActivity : AppCompatActivity() {
     private val compositeDisposable = CompositeDisposable()

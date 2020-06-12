@@ -1,4 +1,4 @@
-package com.example.android_toy_project_study_2020_mvvm.model.data
+package com.example.toyproject2020mvvm.model.data
 
 import com.google.gson.annotations.SerializedName
 
