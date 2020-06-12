@@ -12,16 +12,19 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
-object GitRepository {
+object GitRepository : GitRepositoryInterface {
     lateinit var requestGithubResponseData: Single<GithubResponseData>
     lateinit var requestGithubDetailRepoData: Single<GithubDetailRepoData>
     lateinit var requestGithubDetailUserData: Single<GithubDetailUserData>
 
-    fun githubSearch(keyword: String, callback: BaseResponse<GithubResponseData>): Disposable {
+    override fun githubSearch(
+        keyword: String,
+        callback: BaseResponse<GithubResponseData>
+    ): Disposable {
         requestGithubResponseData =
             RetrofitService.getService().requestGithubResponse(keyword = keyword)
         return requestGithubResponseData
-            .doOnSubscribe {callback.onLoading()}
+            .doOnSubscribe { callback.onLoading() }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -32,7 +35,7 @@ object GitRepository {
             })
     }
 
-    fun getDetailRepository(
+    override fun getDetailRepository(
         userName: String,
         repoName: String,
         callback: BaseResponse<GithubDetailData>
@@ -46,7 +49,7 @@ object GitRepository {
             BiFunction { a: GithubDetailRepoData, b: GithubDetailUserData ->
                 (GithubDetailData(a, b))
             })
-            .doOnSubscribe {callback.onLoading()}
+            .doOnSubscribe { callback.onLoading() }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
