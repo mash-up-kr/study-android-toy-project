@@ -41,22 +41,19 @@ object GitRepository {
         requestGithubDetailRepoData =
             RetrofitService.getService().requestGetRepository(userName, repoName)
         requestGithubDetailUserData = RetrofitService.getService().requestSingleUser(userName)
-        val firstRequest = requestGithubDetailRepoData
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-        val secondRequest = requestGithubDetailUserData
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
         return Single.zip(
-            firstRequest,
-            secondRequest,
+            requestGithubDetailRepoData,
+            requestGithubDetailUserData,
             BiFunction { a: GithubDetailRepoData, b: GithubDetailUserData ->
                 (GithubDetailData(a, b))
-            }).subscribe({
-            callback.onLoaded()
-            callback.onSuccess(it)
-        }, {
-            callback.onError(it)
-        })
+            })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                callback.onLoaded()
+                callback.onSuccess(it)
+            }, {
+                callback.onError(it)
+            })
     }
 }
