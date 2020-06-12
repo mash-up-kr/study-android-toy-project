@@ -18,10 +18,10 @@ object GitRepository {
     lateinit var requestGithubDetailUserData: Single<GithubDetailUserData>
 
     fun githubSearch(keyword: String, callback: BaseResponse<GithubResponseData>): Disposable {
-        callback.onLoading()
         requestGithubResponseData =
             RetrofitService.getService().requestGithubResponse(keyword = keyword)
         return requestGithubResponseData
+            .doOnSubscribe {callback.onLoading()}
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -37,7 +37,6 @@ object GitRepository {
         repoName: String,
         callback: BaseResponse<GithubDetailData>
     ): Disposable {
-        callback.onLoading()
         requestGithubDetailRepoData =
             RetrofitService.getService().requestGetRepository(userName, repoName)
         requestGithubDetailUserData = RetrofitService.getService().requestSingleUser(userName)
@@ -47,6 +46,7 @@ object GitRepository {
             BiFunction { a: GithubDetailRepoData, b: GithubDetailUserData ->
                 (GithubDetailData(a, b))
             })
+            .doOnSubscribe {callback.onLoading()}
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
