@@ -52,9 +52,9 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
     //rx_android
-    def rx_android_version = "2.0.2"
+    def rx_android_version = "2.1.1"
     implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
     //rx_java
-    def rx_java_version = "2.1.9"
+    def rx_java_version = "2.2.19"
     implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
 }
