@@ -9,7 +9,6 @@ import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.model.BaseResponse
 import com.example.toyproject2020mvvm.model.data.GithubRepoData
 import com.example.toyproject2020mvvm.model.data.GithubResponseData
-import com.example.toyproject2020mvvm.model.repository.GitRepository
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
 import com.example.toyproject2020mvvm.ui.recyclerview.ItemAdapter
 import com.example.toyproject2020mvvm.util.GitRepositoryInjector

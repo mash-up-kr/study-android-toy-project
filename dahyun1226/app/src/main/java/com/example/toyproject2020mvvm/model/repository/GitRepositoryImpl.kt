@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
-class GitRepository(
+class GitRepositoryImpl(
     private val api: RetrofitServiceInterface
 ) : GitRepositoryInterface {
 
