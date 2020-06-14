@@ -1,6 +1,7 @@
-package com.example.android_toy_project_study_2020_mvvm.api
+package com.example.toyproject2020mvvm.model.api
 
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitService {
@@ -11,5 +12,6 @@ object RetrofitService {
         Retrofit.Builder()
             .baseUrl("https://api.github.com")
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
 }

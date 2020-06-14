@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.RepositoryDetailActivity">
+    tools:context="com.example.toyproject2020mvvm.ui.RepositoryDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"

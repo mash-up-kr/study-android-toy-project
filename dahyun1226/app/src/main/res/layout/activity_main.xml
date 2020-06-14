@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".ui.MainActivity">
+    tools:context="com.example.toyproject2020mvvm.ui.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"

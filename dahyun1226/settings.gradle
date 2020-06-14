@@ -1,2 +1,2 @@
-rootProject.name='Android_Toy_Project_Study_2020_MVVM'
+rootProject.name='ToyProject2020MVVM'
 include ':app'

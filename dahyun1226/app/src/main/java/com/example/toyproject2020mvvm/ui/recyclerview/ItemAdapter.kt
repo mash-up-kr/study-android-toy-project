@@ -1,4 +1,4 @@
-package com.example.android_toy_project_study_2020_mvvm.recyclerview
+package com.example.toyproject2020mvvm.ui.recyclerview
 
 
 import android.content.Intent
@@ -9,10 +9,10 @@ import android.view.ViewGroup
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.android_toy_project_study_2020_mvvm.R
-import com.example.android_toy_project_study_2020_mvvm.ui.RepositoryDetailActivity.Companion.EXTRA_FULL_NAME
-import com.example.android_toy_project_study_2020_mvvm.data.GithubRepoData
-import com.example.android_toy_project_study_2020_mvvm.ui.RepositoryDetailActivity
+import com.example.toyproject2020mvvm.R
+import com.example.toyproject2020mvvm.ui.RepositoryDetailActivity.Companion.EXTRA_FULL_NAME
+import com.example.toyproject2020mvvm.model.data.GithubRepoData
+import com.example.toyproject2020mvvm.ui.RepositoryDetailActivity
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 
