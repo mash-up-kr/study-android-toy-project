@@ -11,16 +11,14 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.toyproject.R
 import com.example.toyproject.base.util.Dlog
-import com.example.toyproject.data.api.ApiProvider
-import com.example.toyproject.data.model.RepoModel
-import com.example.toyproject.data.model.UserModel
+import com.example.toyproject.data.base.BaseResponse
+import com.example.toyproject.data.injection.Injection
+import com.example.toyproject.data.model.RepoDetailModel
 import com.example.toyproject.data.model.mapToPresentation
-import com.example.toyproject.ui.model.RepoItem
-import com.example.toyproject.ui.model.UserItem
+import com.example.toyproject.repository.RepoRepository
+import com.example.toyproject.ui.model.RepoDetailItem
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_detail.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DetailFragment : Fragment() {
 
@@ -38,13 +36,9 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private val repoApi = ApiProvider.provideRepoApi()
+    private val repoRepository: RepoRepository = Injection.provideRepoRepository()
 
-    private val userApi = ApiProvider.provideUserApi()
-
-    private var repoCall: Call<RepoModel>? = null
-
-    private var userCall: Call<UserModel>? = null
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,82 +64,47 @@ class DetailFragment : Fragment() {
     }
 
     private fun loadData(ownerName: String, repo: String) {
-        //에러표시를 숨깁니다.
-        hideError()
-        //로딩화면을 보여줍니다.
-        showProgress()
 
-        //repo 데이터를 로딩합니다.
-        loadRepoData(ownerName, repo)
-
-        //user 데이터 로딩을 합니다.
-        loadUserData(ownerName)
-    }
-
-    private fun loadRepoData(ownerName: String, repo: String) {
-        repoCall = repoApi.getRepository(ownerName, repo)
-        repoCall?.enqueue(object : Callback<RepoModel> {
-            override fun onResponse(call: Call<RepoModel>, response: Response<RepoModel>) {
-                //로딩 화면을 숨깁니다.
-                hideProgress()
-
-                val body = response.body()
-                if (response.isSuccessful && null != body) {
-                    //repo 데이터를 화면에 보여줍니다.
-                    setRepoData(body.mapToPresentation(requireContext()))
-                } else {
-                    //에러를 표시합니다.
-                    showError(response.message())
-                }
+        repoRepository.getDetailRepository(ownerName, repo, object : BaseResponse<RepoDetailModel> {
+            override fun onSuccess(data: RepoDetailModel) {
+                setRepoDetailData(data.mapToPresentation(requireContext()))
             }
 
-            override fun onFailure(call: Call<RepoModel>, t: Throwable) {
-                hideProgress()
-                showError(t.message)
+            override fun onFail(description: String) {
+                showError(description)
             }
-        })
+
+            override fun onError(throwable: Throwable) {
+                showError(throwable.message)
+            }
+
+            override fun onLoading() {
+                hideError()
+                showProgress()
+            }
+
+            override fun onLoaded() {
+                hideProgress()
+            }
+        }).also {
+            compositeDisposable.add(it)
+        }
     }
 
-    private fun setRepoData(repoItem: RepoItem) {
+    private fun setRepoDetailData(repoDetailItem: RepoDetailItem) {
         Glide.with(requireContext())
-            .load(repoItem.owner.ownerUrl)
+            .load(repoDetailItem.ownerUrl)
             .placeholder(ColorDrawable(Color.GRAY))
             .error(ColorDrawable(Color.RED))
             .into(ivProfile)
 
-        tvTitle.text = repoItem.title
-        tvStars.text = repoItem.stars
-        tvDescription.text = repoItem.description
-        tvLanguage.text = repoItem.language
-    }
+        tvTitle.text = repoDetailItem.title
+        tvStars.text = repoDetailItem.stars
+        tvDescription.text = repoDetailItem.description
+        tvLanguage.text = repoDetailItem.language
 
-    private fun loadUserData(userName: String) {
-        userCall = userApi.getUser(userName)
-        userCall?.enqueue(object : Callback<UserModel> {
-            override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
-                //로딩 화면을 숨깁니다.
-                hideProgress()
-
-                val body = response.body()
-                if (response.isSuccessful && null != body) {
-                    //user 데이터를 화면에 보여줍니다.
-                    setUserData(body.mapToPresentation(requireContext()))
-                } else {
-                    //에러를 표시합니다.
-                    showError(response.message())
-                }
-            }
-
-            override fun onFailure(call: Call<UserModel>, t: Throwable) {
-                hideProgress()
-                showError(t.message)
-            }
-        })
-    }
-
-    private fun setUserData(userItem: UserItem) {
-        tvFollower.text = userItem.followers
-        tvFollowing.text = userItem.following
+        tvFollower.text = repoDetailItem.followers
+        tvFollowing.text = repoDetailItem.following
     }
 
     private fun showError(message: String?) {
@@ -172,8 +131,7 @@ class DetailFragment : Fragment() {
     }
 
     override fun onStop() {
-        repoCall?.cancel()
-        userCall?.cancel()
+        compositeDisposable.dispose()
         super.onStop()
     }
 }

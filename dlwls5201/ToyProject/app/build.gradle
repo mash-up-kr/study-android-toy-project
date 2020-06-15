@@ -41,6 +41,9 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
+    //Retrofit 에서 받은 응답을 옵서버블로 변환해주는 라이브러리
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
     //okHttp
     def okHttpVersion = '3.8.1'
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
@@ -50,6 +53,12 @@ dependencies {
     def glideVersion = '4.10.0'
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //rx android
+    def rxandoirdVersion = '2.1.1'
+    def rxjavaVersion = '2.2.19'
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandoirdVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
 
     //test
     testImplementation 'junit:junit:4.12'
