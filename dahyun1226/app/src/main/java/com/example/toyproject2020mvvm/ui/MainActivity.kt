@@ -6,7 +6,9 @@ import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.example.toyproject2020mvvm.R
+import com.example.toyproject2020mvvm.databinding.ActivityMainBinding
 import com.example.toyproject2020mvvm.model.BaseResponse
 import com.example.toyproject2020mvvm.model.data.GithubRepoData
 import com.example.toyproject2020mvvm.model.data.GithubResponseData
@@ -26,75 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        bt_activity_main_SearchButton.setOnClickListener {
-            if (et_activity_main_Search.text.toString().trim().isEmpty()) {
-                Toast.makeText(this, getString(R.string.put_contents), Toast.LENGTH_SHORT).show()
-            } else {
-                loadingVisible()
-                repository.githubSearch(et_activity_main_Search.text.toString(),
-                    object : BaseResponse<GithubResponseData> {
-                        override fun onSuccess(data: GithubResponseData) {
-                            if (data.totalCount == 0) {
-                                loadingInvisible()
-                                recyclerInvisible()
-                                errorVisible(getString(R.string.no_response))
-                            } else {
-                                recyclerVisible()
-                                rc_activity_main_Recycler.adapter =
-                                    ItemAdapter(data.items as ArrayList<GithubRepoData>)
-                            }
-                        }
-
-                        override fun onError(throwable: Throwable) {
-                            loadingInvisible()
-                            recyclerInvisible()
-                            errorVisible(throwable.toString())
-                        }
-
-                        override fun onLoading() {
-                            recyclerInvisible()
-                            loadingVisible()
-                            errorInvisible()
-                        }
-
-                        override fun onLoaded() {
-                            loadingInvisible()
-                            recyclerVisible()
-                            errorInvisible()
-                        }
-                    }).also {
-                    compositeDisposable.add(it)
-                }
-            }
-        }
-        recyclerInvisible()
-    }
-
-    fun loadingVisible() {
-        tv_activity_main_Loading.visibility = VISIBLE
-    }
-
-    fun loadingInvisible() {
-        tv_activity_main_Loading.visibility = INVISIBLE
-    }
-
-    fun recyclerVisible() {
-        rc_activity_main_Recycler.visibility = VISIBLE
-    }
-
-    fun recyclerInvisible() {
-        rc_activity_main_Recycler.visibility = INVISIBLE
-    }
-
-    fun errorVisible(errorContent: String) {
-        tv_activity_main_ErrorTextViewRepository.text =
-            getString(R.string.error) + errorContent
-        tv_activity_main_ErrorTextViewRepository.visibility = VISIBLE
-    }
-
-    fun errorInvisible() {
-        tv_activity_main_ErrorTextViewRepository.visibility = INVISIBLE
+        //setContentView(R.layout.activity_main)
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.viewModel = mainViewModel
     }
 
     override fun onStop() {
