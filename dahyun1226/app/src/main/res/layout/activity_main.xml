@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    tools:context="com.example.toyproject2020mvvm.ui.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.Toolbar
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.toyproject2020mvvm.viewmodel.MainViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        tools:context="com.example.toyproject2020mvvm.ui.MainActivity">
 
-        <Button
-            android:id="@+id/bt_activity_main_BackButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/abc_vector_test" />
-
-        <EditText
-            android:id="@+id/et_activity_main_Search"
-            android:layout_width="300dp"
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/search"
-            android:inputType="textPersonName" />
+            android:background="@color/colorAccent">
 
-        <Button
-            android:id="@+id/bt_activity_main_SearchButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:drawable/ic_menu_search" />
-    </androidx.appcompat.widget.Toolbar>
+            <Button
+                android:id="@+id/bt_activity_main_BackButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/abc_vector_test" />
+
+            <EditText
+                android:id="@+id/et_activity_main_Search"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/search"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/bt_activity_main_SearchButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@android:drawable/ic_menu_search" />
+        </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -43,8 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
-            </androidx.recyclerview.widget.RecyclerView>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"></androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/tv_activity_main_ErrorTextViewRepository"
@@ -67,5 +74,5 @@
                 android:textSize="50sp"
                 android:visibility="invisible" />
         </FrameLayout>
-
-</LinearLayout>
+    </LinearLayout>
+</layout>
