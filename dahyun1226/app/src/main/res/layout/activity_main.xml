@@ -44,7 +44,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@android:drawable/ic_menu_search"
-                android:onClick="@{(e) -> viewModel.search()}" />
+                android:onClick="@{(v) -> viewModel.search(v.getContext())}" />
         </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
@@ -56,6 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
+                app:bind_items="@{viewModel.repoData}"
+                android:visibility="@{viewModel.recyclerVisible ? View.VISIBLE : View.GONE}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"></androidx.recyclerview.widget.RecyclerView>
 
             <TextView
@@ -65,6 +67,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:text="@{viewModel.errorText}"
                 android:visibility="@{viewModel.errorTextVisible ? View.VISIBLE : View.GONE}" />
 
             <TextView

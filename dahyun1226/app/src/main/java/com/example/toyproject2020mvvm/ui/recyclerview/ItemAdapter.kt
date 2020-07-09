@@ -16,7 +16,7 @@ import com.example.toyproject2020mvvm.ui.RepositoryDetailActivity
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 
-class ItemAdapter(private var items: ArrayList<GithubRepoData>) :
+class ItemAdapter(private var items: List<GithubRepoData>) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     override fun getItemCount() = items.size
