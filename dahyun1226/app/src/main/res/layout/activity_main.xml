@@ -56,8 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
-                app:bind_items="@{viewModel.repoData}"
                 android:visibility="@{viewModel.recyclerVisible ? View.VISIBLE : View.GONE}"
+                app:bind_items="@{viewModel.adapter}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"></androidx.recyclerview.widget.RecyclerView>
 
             <TextView
@@ -66,8 +66,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="40sp"
                 android:text="@{viewModel.errorText}"
+                android:textSize="40sp"
                 android:visibility="@{viewModel.errorTextVisible ? View.VISIBLE : View.GONE}" />
 
             <TextView
