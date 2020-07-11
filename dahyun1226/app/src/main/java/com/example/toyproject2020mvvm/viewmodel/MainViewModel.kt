@@ -1,12 +1,8 @@
 package com.example.toyproject2020mvvm.viewmodel
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableField
@@ -20,9 +16,11 @@ import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
 import com.example.toyproject2020mvvm.ui.RepositoryDetailActivity
 import com.example.toyproject2020mvvm.ui.RepositoryDetailActivity.Companion.EXTRA_FULL_NAME
 import com.example.toyproject2020mvvm.ui.recyclerview.ItemAdapter
+import com.example.toyproject2020mvvm.util.ResourceProvider
 import io.reactivex.disposables.CompositeDisposable
 
 class MainViewModel(
+    private val resourceProvider: ResourceProvider,
     private val repository: GitRepositoryInterface,
     private val compositeDisposable: CompositeDisposable
 ) {
@@ -41,10 +39,9 @@ class MainViewModel(
 
     val repoData = ObservableArrayList<GithubRepoData>()
 
-    fun search(context: Context) {
+    fun search() {
         if (searchText.get() == null || searchText.get() == "") {
-            Toast.makeText(context, context.getString(R.string.put_contents), Toast.LENGTH_SHORT)
-                .show()
+            //Toast.makeText(context, context.getString(R.string.put_contents), Toast.LENGTH_SHORT) .show()
         } else {
             loadingVisible()
             repository.githubSearch(
@@ -53,7 +50,7 @@ class MainViewModel(
                     override fun onSuccess(data: GithubResponseData) {
                         if (data.totalCount == 0) {
                             recyclerInvisible()
-                            errorVisible(context, context.getString(R.string.no_response))
+                            errorVisible(resourceProvider.getString(R.string.no_response))
                         } else {
                             recyclerVisible()
                             repoData.clear()
@@ -65,7 +62,7 @@ class MainViewModel(
                     override fun onError(throwable: Throwable) {
                         loadingInvisible()
                         recyclerInvisible()
-                        errorVisible(context, throwable.toString())
+                        errorVisible(throwable.toString())
                     }
 
                     override fun onLoading() {
@@ -102,8 +99,8 @@ class MainViewModel(
         recyclerVisible.set(false)
     }
 
-    fun errorVisible(context: Context, errorContent: String) {
-        errorText.set(context.getString(R.string.error) + errorContent)
+    fun errorVisible(errorContent: String) {
+        errorText.set(resourceProvider.getString(R.string.error) + errorContent)
         errorTextVisible.set(true)
     }
 

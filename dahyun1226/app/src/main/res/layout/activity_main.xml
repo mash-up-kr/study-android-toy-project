@@ -44,7 +44,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@android:drawable/ic_menu_search"
-                android:onClick="@{(v) -> viewModel.search(v.getContext())}" />
+                android:onClick="@{(v) -> viewModel.search()}" />
         </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
