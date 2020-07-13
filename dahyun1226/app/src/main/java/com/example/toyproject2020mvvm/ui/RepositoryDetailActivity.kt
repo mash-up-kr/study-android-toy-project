@@ -29,8 +29,7 @@ class RepositoryDetailActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_view_repository_detail)
         binding.viewModel = viewModel
         binding.activity = this
-        viewModel.fullName = intent.getStringExtra(EXTRA_FULL_NAME)
-        viewModel.getDetailRepository()
+        viewModel.getDetailRepository(intent.getStringExtra(EXTRA_FULL_NAME))
 
         viewModel.starTextId.addOnPropertyChangedCallback(object :
             Observable.OnPropertyChangedCallback() {

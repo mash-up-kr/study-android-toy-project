@@ -45,9 +45,7 @@ class RepositoryDetailViewModel(
 
     val followings = ObservableField("")
 
-    lateinit var fullName: String
-
-    fun getDetailRepository() {
+    fun getDetailRepository(fullName: String) {
         val userName = fullName.split("/")[0]
         val repoName = fullName.split("/")[1]
         repository.getDetailRepository(
