@@ -45,16 +45,16 @@ class MainViewModel(
         if (searchText.get().isNullOrEmpty()) {
             toastField.set(R.string.put_contents)
         } else {
-            loadingVisible()
+            showLoading()
             repository.githubSearch(
                 searchText.get()!!,
                 object : BaseResponse<GithubResponseData> {
                     override fun onSuccess(data: GithubResponseData) {
                         if (data.totalCount == 0) {
-                            recyclerInvisible()
-                            errorVisible(R.string.no_response)
+                            hideRecycler()
+                            showError(R.string.no_response)
                         } else {
-                            recyclerVisible()
+                            showRecycler()
                             repoData.clear()
                             repoData.addAll(data.items)
                             adapter.notifyDataSetChanged()
@@ -62,21 +62,21 @@ class MainViewModel(
                     }
 
                     override fun onError(throwable: Throwable) {
-                        loadingInvisible()
-                        recyclerInvisible()
-                        errorVisible(R.string.error)
+                        hideLoading()
+                        hideRecycler()
+                        showError(R.string.error)
                     }
 
                     override fun onLoading() {
-                        recyclerInvisible()
-                        loadingVisible()
-                        errorInvisible()
+                        hideRecycler()
+                        showLoading()
+                        hideError()
                     }
 
                     override fun onLoaded() {
-                        loadingInvisible()
-                        recyclerVisible()
-                        errorInvisible()
+                        hideLoading()
+                        showRecycler()
+                        hideError()
                     }
                 }).also {
                 compositeDisposable.add(it)
@@ -85,28 +85,28 @@ class MainViewModel(
     }
 
 
-    fun loadingVisible() {
+    fun showLoading() {
         loadingVisible.set(true)
     }
 
-    fun loadingInvisible() {
+    fun hideLoading() {
         loadingVisible.set(false)
     }
 
-    fun recyclerVisible() {
+    fun showRecycler() {
         recyclerVisible.set(true)
     }
 
-    fun recyclerInvisible() {
+    fun hideRecycler() {
         recyclerVisible.set(false)
     }
 
-    fun errorVisible(errorContent: Int) {
+    fun showError(errorContent: Int) {
         errorTextId.set(errorContent)
         errorTextVisible.set(true)
     }
 
-    fun errorInvisible() {
+    fun hideError() {
         errorTextVisible.set(false)
     }
 

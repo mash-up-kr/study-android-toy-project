@@ -73,49 +73,49 @@ class RepositoryDetailViewModel(
                 }
 
                 override fun onError(throwable: Throwable) {
-                    loadingInvisible()
-                    errorVisible(R.string.error)
-                    layoutInvisible()
+                    hideLoading()
+                    showError(R.string.error)
+                    hideLayout()
                 }
 
                 override fun onLoading() {
-                    loadingVisible()
-                    errorInvisible()
-                    layoutInvisible()
+                    showLoading()
+                    hideError()
+                    hideLayout()
                 }
 
                 override fun onLoaded() {
-                    loadingInvisible()
-                    errorInvisible()
-                    layoutVisible()
+                    hideLoading()
+                    hideError()
+                    showLayout()
                 }
             }).also {
             compositeDisposable.add(it)
         }
     }
 
-    fun layoutVisible() {
+    fun showLayout() {
         layoutVisible.set(true)
     }
 
-    fun layoutInvisible() {
+    fun hideLayout() {
         layoutVisible.set(false)
     }
 
-    fun loadingVisible() {
+    fun showLoading() {
         loadingVisible.set(true)
     }
 
-    fun loadingInvisible() {
+    fun hideLoading() {
         loadingVisible.set(false)
     }
 
-    fun errorVisible(errorContent: Int) {
+    fun showError(errorContent: Int) {
         errorTextId.set(errorContent)
         errorTextVisible.set(true)
     }
 
-    fun errorInvisible() {
+    fun hideError() {
         errorTextVisible.set(false)
     }
 }
