@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.toyproject.R
 import com.example.toyproject.databinding.ActivityMainBinding
+import com.example.toyproject.ui.detail.DetailFragment
 import com.example.toyproject.ui.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
