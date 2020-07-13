@@ -9,7 +9,6 @@ import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.databinding.ActivityMainBinding
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
 import com.example.toyproject2020mvvm.util.GitRepositoryInjector
-import com.example.toyproject2020mvvm.util.ResourceProvider
 import com.example.toyproject2020mvvm.viewmodel.MainViewModel
 import io.reactivex.disposables.CompositeDisposable
 
@@ -19,10 +18,8 @@ class MainActivity : AppCompatActivity() {
 
     private val repository: GitRepositoryInterface = GitRepositoryInjector.provideGitRepository()
 
-    private val resourceProvider = ResourceProvider(this)
-
     private val mainViewModel: MainViewModel =
-        MainViewModel(resourceProvider, repository, compositeDisposable)
+        MainViewModel(repository, compositeDisposable)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +31,15 @@ class MainActivity : AppCompatActivity() {
                 val resId = mainViewModel.toastField.get()
                 if (resId != null) {
                     Toast.makeText(this@MainActivity, resId, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+        mainViewModel.errorTextId.addOnPropertyChangedCallback(object :
+            Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                val resId = mainViewModel.errorTextId.get()
+                if (resId != null) {
+                    mainViewModel.errorText.set(getString(resId))
                 }
             }
         })

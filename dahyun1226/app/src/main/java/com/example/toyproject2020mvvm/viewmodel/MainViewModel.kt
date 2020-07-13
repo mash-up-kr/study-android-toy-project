@@ -1,7 +1,6 @@
 package com.example.toyproject2020mvvm.viewmodel
 
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -17,11 +16,9 @@ import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
 import com.example.toyproject2020mvvm.ui.RepositoryDetailActivity
 import com.example.toyproject2020mvvm.ui.RepositoryDetailActivity.Companion.EXTRA_FULL_NAME
 import com.example.toyproject2020mvvm.ui.recyclerview.ItemAdapter
-import com.example.toyproject2020mvvm.util.ResourceProvider
 import io.reactivex.disposables.CompositeDisposable
 
 class MainViewModel(
-    private val resourceProvider: ResourceProvider,
     private val repository: GitRepositoryInterface,
     private val compositeDisposable: CompositeDisposable
 ) {
@@ -35,6 +32,8 @@ class MainViewModel(
     val errorTextVisible = ObservableField(false)
 
     val errorText = ObservableField("")
+
+    val errorTextId = ObservableField(0)
 
     val searchText = ObservableField("")
 
@@ -53,7 +52,7 @@ class MainViewModel(
                     override fun onSuccess(data: GithubResponseData) {
                         if (data.totalCount == 0) {
                             recyclerInvisible()
-                            errorVisible(resourceProvider.getString(R.string.no_response))
+                            errorVisible(R.string.no_response)
                         } else {
                             recyclerVisible()
                             repoData.clear()
@@ -65,7 +64,7 @@ class MainViewModel(
                     override fun onError(throwable: Throwable) {
                         loadingInvisible()
                         recyclerInvisible()
-                        errorVisible(throwable.toString())
+                        errorVisible(R.string.error)
                     }
 
                     override fun onLoading() {
@@ -102,8 +101,8 @@ class MainViewModel(
         recyclerVisible.set(false)
     }
 
-    fun errorVisible(errorContent: String) {
-        errorText.set(resourceProvider.getString(R.string.error) + errorContent)
+    fun errorVisible(errorContent: Int) {
+        errorTextId.set(errorContent)
         errorTextVisible.set(true)
     }
 
