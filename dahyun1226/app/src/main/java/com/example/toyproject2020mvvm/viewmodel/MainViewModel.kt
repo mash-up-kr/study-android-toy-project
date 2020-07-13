@@ -1,6 +1,7 @@
 package com.example.toyproject2020mvvm.viewmodel
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -39,9 +40,11 @@ class MainViewModel(
 
     val repoData = ObservableArrayList<GithubRepoData>()
 
+    val toastField = ObservableField(0)
+
     fun search() {
-        if (searchText.get() == null || searchText.get() == "") {
-            //Toast.makeText(context, context.getString(R.string.put_contents), Toast.LENGTH_SHORT) .show()
+        if (searchText.get().isNullOrEmpty()) {
+            toastField.set(R.string.put_contents)
         } else {
             loadingVisible()
             repository.githubSearch(

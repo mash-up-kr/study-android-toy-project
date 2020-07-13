@@ -1,8 +1,10 @@
 package com.example.toyproject2020mvvm.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.Observable
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.databinding.ActivityMainBinding
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
@@ -26,6 +28,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
+        mainViewModel.toastField.addOnPropertyChangedCallback(object :
+            Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                val resId = mainViewModel.toastField.get()
+                if (resId != null) {
+                    Toast.makeText(this@MainActivity, resId, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
         binding.viewModel = mainViewModel
     }
 
