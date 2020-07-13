@@ -6,24 +6,20 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.example.toyproject2020mvvm.viewmodel.MainViewModel" />
+            name="repoData"
+            type="com.example.toyproject2020mvvm.model.data.GithubRepoData" />
 
-        <variable
-            name="pos"
-            type="Integer" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{(v) -> viewModel.seeDetailRepo(v,pos)}"
-        tools:context="com.example.toyproject2020mvvm.ui.RepositoryDetailActivity">
+        tools:context="com.example.toyproject2020mvvm.ui.RepositoryDetailActivity"
+        android:onClick="@(v)-> v.repoData}">
 
         <ImageView
             android:id="@+id/iv_recyclerview_item_GitAvatarImage"
-            bind_recycler_pos="@{pos}"
-            bind_recycler_viewmodel="@{viewModel}"
+            bind_image="@{repoData.owner.avatarUrl}"
             android:layout_width="120dp"
             android:layout_height="120dp"
             tools:layout_editor_absoluteY="25dp"
@@ -40,14 +36,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@{viewModel.repoData[pos].fullName}"
+                android:text="@{repoData.fullName}"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tv_recyclerview_item_Language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.repoData[pos].language == null ? String.format(@string/no_language) : viewModel.repoData[pos].language}"
+                android:text="@{repoData.language == null ? String.format(@string/no_language) : repoData.language}"
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>

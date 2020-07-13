@@ -118,10 +118,5 @@ class RepositoryDetailViewModel(
     fun hideError() {
         errorTextVisible.set(false)
     }
-}
 
-@BindingAdapter("bind_image")
-fun setImage(view: ImageView, url: String) {
-    Glide.with(view).load(url)
-        .into(view)
 }

@@ -26,6 +26,11 @@ class ItemAdapter(private val viewModel: MainViewModel) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(viewModel, position);
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context, RepositoryDetailActivity::class.java)
+            intent.putExtra(EXTRA_FULL_NAME, holder.binding.repoData?.fullName)
+            it.context.startActivity(intent)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,12 +39,11 @@ class ItemAdapter(private val viewModel: MainViewModel) :
         return ViewHolder(binding)
     }
 
-    class ViewHolder(private val binding: RecyclerviewItemBinding) :
+    class ViewHolder(val binding: RecyclerviewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(viewModel: MainViewModel, pos: Int) {
-            binding.viewModel = viewModel
-            binding.pos = pos;
+            binding.repoData = viewModel.repoData[pos]
         }
     }
 }

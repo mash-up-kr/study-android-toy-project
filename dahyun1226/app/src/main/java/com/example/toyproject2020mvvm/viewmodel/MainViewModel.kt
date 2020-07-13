@@ -110,21 +110,6 @@ class MainViewModel(
         errorTextVisible.set(false)
     }
 
-    fun seeDetailRepo(view: View, pos: Int) {
-        val intent = Intent(view.context, RepositoryDetailActivity::class.java)
-        intent.putExtra(EXTRA_FULL_NAME, repoData[pos].fullName)
-        view.context.startActivity(intent)
-    }
 }
 
-@BindingAdapter("bind_items")
-fun setBindItems(view: RecyclerView, adapter: ItemAdapter) {
-    view.adapter = adapter
-}
-
-@BindingAdapter(value = ["bind_recycler_viewmodel", "bind_recycler_pos"])
-fun setImage(view: ImageView, viewModel: MainViewModel, pos: Int) {
-    Glide.with(view).load(viewModel.repoData[pos].owner.avatarUrl)
-        .into(view)
-}
 
