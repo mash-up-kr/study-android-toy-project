@@ -15,6 +15,7 @@ import com.example.toyproject.data.injection.Injection
 import com.example.toyproject.databinding.FragmentSearchBinding
 import com.example.toyproject.ui.MainActivity
 import com.example.toyproject.ui.adapter.RepositoryAdapter
+import com.example.toyproject.utils.AppUtils
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_search.*
 
@@ -92,6 +93,15 @@ class SearchFragment : Fragment() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                 searchModel.items.get()?.let {
                     repoAdapter.setItems(it)
+                }
+            }
+        })
+
+        searchModel.isKeyboard.addOnPropertyChangedCallback(object :
+            Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                if (searchModel.isKeyboard.get() == false) {
+                    AppUtils.hideSoftKeyBoard(requireActivity())
                 }
             }
         })

@@ -1,6 +1,7 @@
 package com.example.toyproject.ui.search
 
 import android.content.Context
+import android.util.Log
 import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import com.example.toyproject.R
@@ -18,6 +19,9 @@ class SearchViewModel(
 
     //로딩 필드
     val isLoading = ObservableField(false)
+
+    //키보드 필드
+    val isKeyboard = ObservableField(false)
 
     //검색 버튼 활성 필드
     val enableSearchButton = ObservableField(true)
@@ -47,6 +51,8 @@ class SearchViewModel(
     }
 
     fun searchRepository(context: Context, query: String) {
+        hideKeyboard()
+
         searchRepository.searchRepositories(query, object : BaseResponse<RepoSearchResponse> {
             override fun onSuccess(data: RepoSearchResponse) {
                 items.set(data.items.map { it.mapToPresentation(context) })
@@ -57,10 +63,12 @@ class SearchViewModel(
             }
 
             override fun onFail(description: String) {
+                Log.d("MyTag", "description : $description")
                 showErrorMessage(description)
             }
 
             override fun onError(throwable: Throwable) {
+                Log.d("MyTag", "throwable : ${throwable.message}")
                 showErrorMessage(throwable.message ?: context.getString(R.string.unexpected_error))
             }
 
@@ -88,6 +96,11 @@ class SearchViewModel(
 
     private fun hideLoading() {
         isLoading.set(false)
+    }
+
+    private fun hideKeyboard() {
+        isKeyboard.set(false)
+        isKeyboard.notifyChange()
     }
 
     private fun showErrorMessage(error: String) {
