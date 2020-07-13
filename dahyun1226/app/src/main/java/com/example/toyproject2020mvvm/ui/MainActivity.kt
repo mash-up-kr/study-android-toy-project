@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.viewModel = mainViewModel
         mainViewModel.toastField.addOnPropertyChangedCallback(object :
             Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        binding.viewModel = mainViewModel
     }
 
     override fun onDestroy() {

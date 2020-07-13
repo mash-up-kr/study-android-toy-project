@@ -25,10 +25,12 @@ class RepositoryDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.fullName = intent.getStringExtra(EXTRA_FULL_NAME)
-        viewModel.getDetailRepository()
         val binding: ActivityViewRepositoryDetailBindingImpl =
             DataBindingUtil.setContentView(this, R.layout.activity_view_repository_detail)
+        binding.viewModel = viewModel
+        binding.activity = this
+        viewModel.fullName = intent.getStringExtra(EXTRA_FULL_NAME)
+        viewModel.getDetailRepository()
 
         viewModel.starTextId.addOnPropertyChangedCallback(object :
             Observable.OnPropertyChangedCallback() {
@@ -81,8 +83,6 @@ class RepositoryDetailActivity : AppCompatActivity() {
                 )
             }
         })
-        binding.viewModel = viewModel
-        binding.activity = this
     }
 
     override fun onDestroy() {
