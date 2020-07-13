@@ -108,7 +108,7 @@ class SearchFragment : Fragment() {
     }
 
     override fun onStop() {
-        compositeDisposable.dispose()
+        compositeDisposable.clear()
         super.onStop()
     }
 }
