@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = mainViewModel
+
         mainViewModel.toastField.addOnPropertyChangedCallback(object :
             Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
         mainViewModel.errorTextId.addOnPropertyChangedCallback(object :
             Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
@@ -42,6 +44,13 @@ class MainActivity : AppCompatActivity() {
                 if (resId != null) {
                     mainViewModel.errorText.set(getString(resId))
                 }
+            }
+        })
+
+        mainViewModel.searchText.addOnPropertyChangedCallback(object :
+            Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                mainViewModel.search()
             }
         })
     }
