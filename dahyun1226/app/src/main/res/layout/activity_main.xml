@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@{viewModel.errorText}"
+                android:text="@{viewModel.errorTextId}"
                 android:textSize="40sp"
                 android:visibility="@{viewModel.errorTextVisible ? View.VISIBLE : View.GONE}" />
 

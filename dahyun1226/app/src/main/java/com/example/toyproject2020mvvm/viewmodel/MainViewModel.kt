@@ -31,9 +31,7 @@ class MainViewModel(
 
     val errorTextVisible = ObservableField(false)
 
-    val errorText = ObservableField("")
-
-    val errorTextId = ObservableField(0)
+    val errorTextId = ObservableField(R.string.error)
 
     val searchText = ObservableField("")
 

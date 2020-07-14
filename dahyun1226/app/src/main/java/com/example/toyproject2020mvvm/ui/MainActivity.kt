@@ -37,16 +37,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        mainViewModel.errorTextId.addOnPropertyChangedCallback(object :
-            Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                val resId = mainViewModel.errorTextId.get()
-                if (resId != null) {
-                    mainViewModel.errorText.set(getString(resId))
-                }
-            }
-        })
-
         mainViewModel.searchText.addOnPropertyChangedCallback(object :
             Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {

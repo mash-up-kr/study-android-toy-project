@@ -25,25 +25,19 @@ class RepositoryDetailViewModel(
 
     val starText = ObservableField("")
 
-    val starTextId = ObservableField(0)
-
-    val errorText = ObservableField("")
-
-    val errorTextId = ObservableField(0)
+    val errorTextId = ObservableField(R.string.error)
 
     val descriptionText = ObservableField("")
 
-    val languageText = ObservableField("")
+    val languageNotExist = ObservableField(R.string.no_language)
 
-    val languageTextId = ObservableField(0)
+    val languageText = ObservableField("")
 
     val imageUrl = ObservableField("")
 
-    val followersAndFollowingsText = ObservableField("")
+    val followersNum = ObservableField("")
 
-    val followers = ObservableField("")
-
-    val followings = ObservableField("")
+    val followingsNum = ObservableField("")
 
     fun getDetailRepository(fullName: String) {
         val userName = fullName.split("/")[0]
@@ -61,15 +55,13 @@ class RepositoryDetailViewModel(
                     descriptionText.set(
                         data.githubDetailRepoData.description
                     )
-                    if (data.githubDetailRepoData.language == null) {
-                        languageTextId.set(R.string.no_language)
-                    } else {
+                    if (data.githubDetailRepoData.language != null) {
                         languageText.set(
                             data.githubDetailRepoData.language
                         )
                     }
-                    followers.set(data.githubDetailUserData.followers.toString())
-                    followings.set(data.githubDetailUserData.following.toString())
+                    followersNum.set(data.githubDetailUserData.followers.toString())
+                    followingsNum.set(data.githubDetailUserData.following.toString())
                 }
 
                 override fun onError(throwable: Throwable) {

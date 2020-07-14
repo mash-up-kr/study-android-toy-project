@@ -31,57 +31,6 @@ class RepositoryDetailActivity : AppCompatActivity() {
         binding.activity = this
         viewModel.getDetailRepository(intent.getStringExtra(EXTRA_FULL_NAME))
 
-        viewModel.starTextId.addOnPropertyChangedCallback(object :
-            Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                val resId = viewModel.starTextId.get()
-                if (resId != null) {
-                    viewModel.starText.set(getString(resId))
-                }
-            }
-        })
-
-        viewModel.errorTextId.addOnPropertyChangedCallback(object :
-            Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                val resId = viewModel.errorTextId.get()
-                if (resId != null) {
-                    viewModel.errorText.set(getString(resId))
-                }
-            }
-        })
-
-        viewModel.languageTextId.addOnPropertyChangedCallback(object :
-            Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                val resId = viewModel.languageTextId.get()
-                if (resId != null) {
-                    viewModel.languageText.set(getString(resId))
-                }
-            }
-        })
-
-        viewModel.followers.addOnPropertyChangedCallback(object :
-            Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                viewModel.followersAndFollowingsText.set(
-                    getString(R.string.followers) + viewModel.followers.get() + getString(
-                        R.string.followings
-                    ) + viewModel.followings.get()
-                )
-            }
-        })
-
-        viewModel.followings.addOnPropertyChangedCallback(object :
-            Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                viewModel.followersAndFollowingsText.set(
-                    getString(R.string.followers) + viewModel.followers.get() + getString(
-                        R.string.followings
-                    ) + viewModel.followings.get()
-                )
-            }
-        })
     }
 
     override fun onDestroy() {
