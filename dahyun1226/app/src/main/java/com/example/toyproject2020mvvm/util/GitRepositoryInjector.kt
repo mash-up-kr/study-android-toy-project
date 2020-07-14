@@ -5,7 +5,10 @@ import com.example.toyproject2020mvvm.model.repository.GitRepositoryImpl
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
 
 object GitRepositoryInjector {
+
     fun provideGitRepository(): GitRepositoryInterface {
+
         return GitRepositoryImpl(RetrofitService.getService())
+
     }
 }
