@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.Observable
+import androidx.lifecycle.Observer
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.databinding.ActivityMainBinding
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
@@ -27,22 +28,13 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = mainViewModel
-
-        mainViewModel.toastField.addOnPropertyChangedCallback(object :
-            Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                val resId = mainViewModel.toastField.get()
-                if (resId != null) {
-                    Toast.makeText(this@MainActivity, resId, Toast.LENGTH_SHORT).show()
-                }
-            }
+        binding.lifecycleOwner = this
+        mainViewModel.toastField.observe(this, Observer {
+            Toast.makeText(this,R.string.put_contents,Toast.LENGTH_SHORT).show()
         })
 
-        mainViewModel.searchText.addOnPropertyChangedCallback(object :
-            Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                mainViewModel.search()
-            }
+        mainViewModel.searchText.observe(this, Observer {
+            mainViewModel.search()
         })
     }
 

@@ -1,20 +1,11 @@
 package com.example.toyproject2020mvvm.viewmodel
 
-import android.content.Intent
-import android.view.View
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableArrayList
-import androidx.databinding.ObservableField
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import androidx.lifecycle.MutableLiveData
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.model.BaseResponse
 import com.example.toyproject2020mvvm.model.data.GithubRepoData
 import com.example.toyproject2020mvvm.model.data.GithubResponseData
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
-import com.example.toyproject2020mvvm.ui.RepositoryDetailActivity
-import com.example.toyproject2020mvvm.ui.RepositoryDetailActivity.Companion.EXTRA_FULL_NAME
 import com.example.toyproject2020mvvm.ui.recyclerview.ItemAdapter
 import io.reactivex.disposables.CompositeDisposable
 
@@ -25,27 +16,27 @@ class MainViewModel(
 
     val adapter = ItemAdapter(this)
 
-    val loadingVisible = ObservableField(false)
+    val loadingVisible = MutableLiveData<Boolean>(false)
 
-    val recyclerVisible = ObservableField(false)
+    val recyclerVisible = MutableLiveData<Boolean>(false)
 
-    val errorTextVisible = ObservableField(false)
+    val errorTextVisible = MutableLiveData<Boolean>(false)
 
-    val errorTextId = ObservableField(R.string.error)
+    val errorTextId = MutableLiveData<Int>(R.string.error)
 
-    val searchText = ObservableField("")
+    val searchText =MutableLiveData<String>()
 
-    val repoData = ObservableArrayList<GithubRepoData>()
+    val repoData = MutableLiveData<List<GithubRepoData>>()
 
-    val toastField = ObservableField(0)
+    val toastField = MutableLiveData<Int>(R.string.error)
 
     fun search() {
-        if (searchText.get().isNullOrEmpty()) {
-            toastField.set(R.string.put_contents)
+        if (searchText.value.isNullOrEmpty()) {
+            toastField.postValue(R.string.put_contents)
         } else {
             showLoading()
             repository.githubSearch(
-                searchText.get()!!,
+                searchText.value!!,
                 object : BaseResponse<GithubResponseData> {
                     override fun onSuccess(data: GithubResponseData) {
                         if (data.totalCount == 0) {
@@ -53,8 +44,7 @@ class MainViewModel(
                             showError(R.string.no_response)
                         } else {
                             showRecycler()
-                            repoData.clear()
-                            repoData.addAll(data.items)
+                            repoData.postValue(data.items)
                             adapter.notifyDataSetChanged()
                         }
                     }
@@ -84,28 +74,28 @@ class MainViewModel(
 
 
     fun showLoading() {
-        loadingVisible.set(true)
+        loadingVisible.postValue(true)
     }
 
     fun hideLoading() {
-        loadingVisible.set(false)
+        loadingVisible.postValue(false)
     }
 
     fun showRecycler() {
-        recyclerVisible.set(true)
+        recyclerVisible.postValue(true)
     }
 
     fun hideRecycler() {
-        recyclerVisible.set(false)
+        recyclerVisible.postValue(false)
     }
 
     fun showError(errorContent: Int) {
-        errorTextId.set(errorContent)
-        errorTextVisible.set(true)
+        errorTextId.postValue(errorContent)
+        errorTextVisible.postValue(true)
     }
 
     fun hideError() {
-        errorTextVisible.set(false)
+        errorTextVisible.postValue(false)
     }
 
 }
