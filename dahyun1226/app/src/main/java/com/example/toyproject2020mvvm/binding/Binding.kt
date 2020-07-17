@@ -21,10 +21,3 @@ fun setImage(view: ImageView, url: String) {
     Glide.with(view).load(url)
         .into(view)
 }
-
-//@BindingAdapter("see_detail_repo")
-//fun seeDetailRepo(view: View, githubRepoData: GithubRepoData) {
-//    val intent = Intent(view.context, RepositoryDetailActivity::class.java)
-//    intent.putExtra(EXTRA_FULL_NAME, githubRepoData.name)
-//    view.context.startActivity(intent)
-//}

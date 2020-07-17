@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center|center_horizontal"
-                android:text=""
+                android:text="@{viewModel.errorTextId}"
                 android:textSize="40sp"
                 android:visibility="@{viewModel.errorTextVisible ? View.VISIBLE : View.GONE}" />
 
@@ -163,7 +163,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="@{ viewModel.languageText != null ? viewModel.languageText : viewModel.languageNotExist}" />
+                        android:text="@{ viewModel.languageText == null ? String.format(@string/no_language) : viewModel.languageText}" />
                 </LinearLayout>
 
             </LinearLayout>

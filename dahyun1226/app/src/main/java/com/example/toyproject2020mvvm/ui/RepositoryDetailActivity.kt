@@ -29,8 +29,8 @@ class RepositoryDetailActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_view_repository_detail)
         binding.viewModel = viewModel
         binding.activity = this
+        binding.lifecycleOwner = this
         viewModel.getDetailRepository(intent.getStringExtra(EXTRA_FULL_NAME))
-
     }
 
     override fun onDestroy() {

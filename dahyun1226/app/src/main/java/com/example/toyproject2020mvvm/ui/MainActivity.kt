@@ -32,10 +32,6 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.toastField.observe(this, Observer {
             Toast.makeText(this,R.string.put_contents,Toast.LENGTH_SHORT).show()
         })
-
-        mainViewModel.searchText.observe(this, Observer {
-            mainViewModel.search()
-        })
     }
 
     override fun onDestroy() {

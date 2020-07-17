@@ -24,7 +24,7 @@ class MainViewModel(
 
     val errorTextId = MutableLiveData<Int>(R.string.error)
 
-    val searchText =MutableLiveData<String>()
+    val searchText = MutableLiveData<String>()
 
     val repoData = MutableLiveData<List<GithubRepoData>>()
 
