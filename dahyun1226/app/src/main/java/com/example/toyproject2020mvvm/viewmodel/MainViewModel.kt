@@ -1,6 +1,7 @@
 package com.example.toyproject2020mvvm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.model.BaseResponse
 import com.example.toyproject2020mvvm.model.data.GithubRepoData
@@ -12,7 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 class MainViewModel(
     private val repository: GitRepositoryInterface,
     private val compositeDisposable: CompositeDisposable
-) {
+): ViewModel() {
 
     val adapter = ItemAdapter(this)
 

@@ -4,6 +4,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.model.BaseResponse
@@ -14,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 class RepositoryDetailViewModel(
     private val repository: GitRepositoryInterface,
     private val compositeDisposable: CompositeDisposable
-) {
+) : ViewModel() {
 
     val loadingVisible = MutableLiveData<Boolean>(false)
 
