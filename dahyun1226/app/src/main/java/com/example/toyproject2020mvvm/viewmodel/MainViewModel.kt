@@ -11,9 +11,10 @@ import com.example.toyproject2020mvvm.ui.recyclerview.ItemAdapter
 import io.reactivex.disposables.CompositeDisposable
 
 class MainViewModel(
-    private val repository: GitRepositoryInterface,
-    private val compositeDisposable: CompositeDisposable
-): ViewModel() {
+    private val repository: GitRepositoryInterface
+) : ViewModel() {
+
+    val compositeDisposable = CompositeDisposable()
 
     val adapter = ItemAdapter(this)
 
@@ -73,7 +74,6 @@ class MainViewModel(
         }
     }
 
-
     fun showLoading() {
         loadingVisible.postValue(true)
     }
@@ -99,6 +99,10 @@ class MainViewModel(
         errorTextVisible.postValue(false)
     }
 
+    override fun onCleared() {
+        compositeDisposable.clear()
+        super.onCleared()
+    }
 }
 
 

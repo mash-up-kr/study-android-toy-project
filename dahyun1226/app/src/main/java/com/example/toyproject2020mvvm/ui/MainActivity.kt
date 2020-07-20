@@ -17,21 +17,22 @@ import com.example.toyproject2020mvvm.util.GitRepositoryInjector
 import com.example.toyproject2020mvvm.viewmodel.MainViewModel
 import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.MainViewModelFactory
 import io.reactivex.disposables.CompositeDisposable
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    private val compositeDisposable = CompositeDisposable()
-
-    private val repository: GitRepositoryInterface = GitRepositoryInjector.provideGitRepository()
+    private val repository: GitRepositoryInterface by inject()
 
     private lateinit var mainViewModel: MainViewModel
+
+    private val mainViewModelFactory = MainViewModelFactory(repository)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         mainViewModel =
-            ViewModelProvider(this, MainViewModelFactory(repository, compositeDisposable)).get(
+            ViewModelProvider(this, mainViewModelFactory).get(
                 MainViewModel::class.java
             )
         binding.viewModel = mainViewModel
@@ -39,11 +40,6 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.toastField.observe(this, Observer {
             Toast.makeText(this, R.string.put_contents, Toast.LENGTH_SHORT).show()
         })
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.dispose()
     }
 }
 
