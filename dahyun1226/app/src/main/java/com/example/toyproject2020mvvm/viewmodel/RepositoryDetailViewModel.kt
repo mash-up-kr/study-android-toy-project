@@ -13,9 +13,10 @@ import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
 import io.reactivex.disposables.CompositeDisposable
 
 class RepositoryDetailViewModel(
-    private val repository: GitRepositoryInterface,
-    private val compositeDisposable: CompositeDisposable
+    private val repository: GitRepositoryInterface
 ) : ViewModel() {
+
+    val compositeDisposable = CompositeDisposable()
 
     val loadingVisible = MutableLiveData<Boolean>(false)
 
@@ -109,6 +110,11 @@ class RepositoryDetailViewModel(
 
     fun hideError() {
         errorTextVisible.postValue(false)
+    }
+
+    override fun onCleared() {
+        compositeDisposable.clear()
+        super.onCleared()
     }
 
 }

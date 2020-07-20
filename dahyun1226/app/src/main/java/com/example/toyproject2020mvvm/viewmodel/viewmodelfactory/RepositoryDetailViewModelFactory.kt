@@ -8,12 +8,11 @@ import com.example.toyproject2020mvvm.viewmodel.RepositoryDetailViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 class RepositoryDetailViewModelFactory(
-    private val repository: GitRepositoryInterface,
-    private val compositeDisposable: CompositeDisposable
+    private val repository: GitRepositoryInterface
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(RepositoryDetailViewModel::class.java)) {
-            RepositoryDetailViewModel(repository, compositeDisposable) as T
+            RepositoryDetailViewModel(repository) as T
         } else {
             throw IllegalArgumentException()
         }

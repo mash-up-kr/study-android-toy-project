@@ -14,15 +14,14 @@ import com.example.toyproject2020mvvm.viewmodel.RepositoryDetailViewModel
 import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.MainViewModelFactory
 import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.RepositoryDetailViewModelFactory
 import io.reactivex.disposables.CompositeDisposable
+import org.koin.android.ext.android.inject
 
 class RepositoryDetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_FULL_NAME = "FullName"
     }
 
-    private val repository: GitRepositoryInterface = GitRepositoryInjector.provideGitRepository()
-
-    private val compositeDisposable = CompositeDisposable()
+    private val repository: GitRepositoryInterface by inject()
 
     private lateinit var viewModel: RepositoryDetailViewModel
 
@@ -32,7 +31,7 @@ class RepositoryDetailActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_view_repository_detail)
         viewModel = ViewModelProvider(
             this,
-            RepositoryDetailViewModelFactory(repository, compositeDisposable)
+            RepositoryDetailViewModelFactory(repository)
         ).get(RepositoryDetailViewModel::class.java)
         binding.viewModel = viewModel
         binding.activity = this
@@ -40,8 +39,4 @@ class RepositoryDetailActivity : AppCompatActivity() {
         viewModel.getDetailRepository(intent.getStringExtra(EXTRA_FULL_NAME))
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.dispose()
-    }
 }
