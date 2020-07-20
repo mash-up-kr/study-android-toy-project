@@ -21,11 +21,9 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    private val repository: GitRepositoryInterface by inject()
-
     private lateinit var mainViewModel: MainViewModel
 
-    private val mainViewModelFactory = MainViewModelFactory(repository)
+    private val mainViewModelFactory: MainViewModelFactory by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

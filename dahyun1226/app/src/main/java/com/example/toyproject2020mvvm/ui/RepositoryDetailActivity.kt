@@ -21,9 +21,9 @@ class RepositoryDetailActivity : AppCompatActivity() {
         const val EXTRA_FULL_NAME = "FullName"
     }
 
-    private val repository: GitRepositoryInterface by inject()
-
     private lateinit var viewModel: RepositoryDetailViewModel
+
+    private val repositoryDetailViewModelFactory: RepositoryDetailViewModelFactory by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class RepositoryDetailActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_view_repository_detail)
         viewModel = ViewModelProvider(
             this,
-            RepositoryDetailViewModelFactory(repository)
+            repositoryDetailViewModelFactory
         ).get(RepositoryDetailViewModel::class.java)
         binding.viewModel = viewModel
         binding.activity = this

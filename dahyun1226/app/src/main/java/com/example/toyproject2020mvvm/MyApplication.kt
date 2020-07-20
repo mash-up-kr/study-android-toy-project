@@ -8,6 +8,7 @@ import com.example.toyproject2020mvvm.model.repository.GitRepositoryImpl
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
 import com.example.toyproject2020mvvm.viewmodel.MainViewModel
 import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.MainViewModelFactory
+import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.RepositoryDetailViewModelFactory
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -29,12 +30,20 @@ class MyApplication : Application() {
 
 var modelPart = module {
     //retrofit
-    factory<RetrofitServiceInterface> {
+    single<RetrofitServiceInterface> {
        RetrofitService.getService()
     }
     //repository
     factory<GitRepositoryInterface>{
         GitRepositoryImpl(get())
+    }
+    //MainViewModelFactory
+    single {
+        MainViewModelFactory(get())
+    }
+    //RepositoryDetailViewModelFactory
+    single {
+        RepositoryDetailViewModelFactory(get())
     }
 }
 
