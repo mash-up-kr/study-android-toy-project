@@ -1,11 +1,7 @@
 package com.example.toyproject2020mvvm.viewmodel
 
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bumptech.glide.Glide
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.model.BaseResponse
 import com.example.toyproject2020mvvm.model.data.GithubDetailData

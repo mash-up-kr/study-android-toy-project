@@ -1,14 +1,11 @@
 package com.example.toyproject2020mvvm.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.databinding.ActivityViewRepositoryDetailBindingImpl
 import com.example.toyproject2020mvvm.viewmodel.RepositoryDetailViewModel
-import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.RepositoryDetailViewModelFactory
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RepositoryDetailActivity : AppCompatActivity() {
