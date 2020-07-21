@@ -24,7 +24,9 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = mainViewModel
         binding.lifecycleOwner = this
         mainViewModel.toastField.observe(this, Observer {
-            Toast.makeText(this, R.string.put_contents, Toast.LENGTH_SHORT).show()
+            it.getContentIfNotHandled()?.let { // Only proceed if the event has never been handled
+                Toast.makeText(this,R.string.put_contents,Toast.LENGTH_SHORT).show()
+            }
         })
     }
 }

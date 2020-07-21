@@ -8,6 +8,7 @@ import com.example.toyproject2020mvvm.model.data.GithubRepoData
 import com.example.toyproject2020mvvm.model.data.GithubResponseData
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
 import com.example.toyproject2020mvvm.ui.recyclerview.ItemAdapter
+import com.example.toyproject2020mvvm.util.Event
 import io.reactivex.disposables.CompositeDisposable
 
 class MainViewModel(
@@ -30,11 +31,11 @@ class MainViewModel(
 
     val repoData = MutableLiveData<List<GithubRepoData>>()
 
-    val toastField = MutableLiveData<Int>(R.string.error)
+    val toastField = MutableLiveData<Event<Int>>()
 
     fun search() {
         if (searchText.value.isNullOrEmpty()) {
-            toastField.postValue(R.string.put_contents)
+            toastField.postValue(Event(R.string.put_contents))
         } else {
             showLoading()
             repository.githubSearch(
