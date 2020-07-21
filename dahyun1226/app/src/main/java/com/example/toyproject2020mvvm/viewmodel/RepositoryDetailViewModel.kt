@@ -1,9 +1,7 @@
 package com.example.toyproject2020mvvm.viewmodel
 
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableField
-import com.bumptech.glide.Glide
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.model.BaseResponse
 import com.example.toyproject2020mvvm.model.data.GithubDetailData
@@ -11,33 +9,32 @@ import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
 import io.reactivex.disposables.CompositeDisposable
 
 class RepositoryDetailViewModel(
-    private val repository: GitRepositoryInterface,
-    private val compositeDisposable: CompositeDisposable
-) {
+    private val repository: GitRepositoryInterface
+) : ViewModel() {
 
-    val loadingVisible = ObservableField(false)
+    val compositeDisposable = CompositeDisposable()
 
-    val layoutVisible = ObservableField(false)
+    val loadingVisible = MutableLiveData<Boolean>(false)
 
-    val errorTextVisible = ObservableField(false)
+    val layoutVisible = MutableLiveData<Boolean>(false)
 
-    val fullNameText = ObservableField("")
+    val errorTextVisible = MutableLiveData<Boolean>(false)
 
-    val starText = ObservableField("")
+    val fullNameText = MutableLiveData<String>("")
 
-    val errorTextId = ObservableField(R.string.error)
+    val starText = MutableLiveData<String>("")
 
-    val descriptionText = ObservableField("")
+    val errorTextId = MutableLiveData<Int>(R.string.error)
 
-    val languageNotExist = ObservableField(R.string.no_language)
+    val descriptionText = MutableLiveData<String>("")
 
-    val languageText = ObservableField("")
+    val languageText = MutableLiveData<String>()
 
-    val imageUrl = ObservableField("")
+    val imageUrl = MutableLiveData<String>("")
 
-    val followersNum = ObservableField("")
+    val followersNum = MutableLiveData<String>("")
 
-    val followingsNum = ObservableField("")
+    val followingsNum = MutableLiveData<String>("")
 
     fun getDetailRepository(fullName: String) {
         val userName = fullName.split("/")[0]
@@ -47,21 +44,21 @@ class RepositoryDetailViewModel(
             repoName,
             object : BaseResponse<GithubDetailData> {
                 override fun onSuccess(data: GithubDetailData) {
-                    imageUrl.set(data.githubDetailRepoData.owner.avatarUrl)
-                    fullNameText.set(data.githubDetailRepoData.fullName)
-                    starText.set(
+                    imageUrl.postValue(data.githubDetailRepoData.owner.avatarUrl)
+                    fullNameText.postValue(data.githubDetailRepoData.fullName)
+                    starText.postValue(
                         data.githubDetailRepoData.stargazersCount.toString()
                     )
-                    descriptionText.set(
+                    descriptionText.postValue(
                         data.githubDetailRepoData.description
                     )
                     if (data.githubDetailRepoData.language != null) {
-                        languageText.set(
+                        languageText.postValue(
                             data.githubDetailRepoData.language
                         )
                     }
-                    followersNum.set(data.githubDetailUserData.followers.toString())
-                    followingsNum.set(data.githubDetailUserData.following.toString())
+                    followersNum.postValue(data.githubDetailUserData.followers.toString())
+                    followingsNum.postValue(data.githubDetailUserData.following.toString())
                 }
 
                 override fun onError(throwable: Throwable) {
@@ -87,28 +84,33 @@ class RepositoryDetailViewModel(
     }
 
     fun showLayout() {
-        layoutVisible.set(true)
+        layoutVisible.postValue(true)
     }
 
     fun hideLayout() {
-        layoutVisible.set(false)
+        layoutVisible.postValue(false)
     }
 
     fun showLoading() {
-        loadingVisible.set(true)
+        loadingVisible.postValue(true)
     }
 
     fun hideLoading() {
-        loadingVisible.set(false)
+        loadingVisible.postValue(false)
     }
 
     fun showError(errorContent: Int) {
-        errorTextId.set(errorContent)
-        errorTextVisible.set(true)
+        errorTextId.postValue(errorContent)
+        errorTextVisible.postValue(true)
     }
 
     fun hideError() {
-        errorTextVisible.set(false)
+        errorTextVisible.postValue(false)
+    }
+
+    override fun onCleared() {
+        compositeDisposable.dispose()
+        super.onCleared()
     }
 
 }

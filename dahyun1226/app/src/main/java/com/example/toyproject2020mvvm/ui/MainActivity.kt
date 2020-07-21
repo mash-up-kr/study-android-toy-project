@@ -4,50 +4,27 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.Observable
+import androidx.lifecycle.Observer
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.databinding.ActivityMainBinding
-import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
-import com.example.toyproject2020mvvm.util.GitRepositoryInjector
 import com.example.toyproject2020mvvm.viewmodel.MainViewModel
-import io.reactivex.disposables.CompositeDisposable
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val compositeDisposable = CompositeDisposable()
-
-    private val repository: GitRepositoryInterface = GitRepositoryInjector.provideGitRepository()
-
-    private val mainViewModel: MainViewModel =
-        MainViewModel(repository, compositeDisposable)
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = mainViewModel
-
-        mainViewModel.toastField.addOnPropertyChangedCallback(object :
-            Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                val resId = mainViewModel.toastField.get()
-                if (resId != null) {
-                    Toast.makeText(this@MainActivity, resId, Toast.LENGTH_SHORT).show()
-                }
+        binding.lifecycleOwner = this
+        mainViewModel.toastField.observe(this, Observer {
+            it.getContentIfNotHandled()?.let { // Only proceed if the event has never been handled
+                Toast.makeText(this,R.string.put_contents,Toast.LENGTH_SHORT).show()
             }
         })
-
-        mainViewModel.searchText.addOnPropertyChangedCallback(object :
-            Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                mainViewModel.search()
-            }
-        })
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.dispose()
     }
 }
 

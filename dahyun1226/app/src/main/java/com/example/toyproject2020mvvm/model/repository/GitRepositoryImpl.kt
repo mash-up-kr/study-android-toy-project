@@ -1,8 +1,6 @@
 package com.example.toyproject2020mvvm.model.repository
 
-import android.util.Log
 import com.example.toyproject2020mvvm.model.BaseResponse
-import com.example.toyproject2020mvvm.model.api.RetrofitService
 import com.example.toyproject2020mvvm.model.api.RetrofitServiceInterface
 import com.example.toyproject2020mvvm.model.data.GithubDetailData
 import com.example.toyproject2020mvvm.model.data.GithubDetailRepoData
