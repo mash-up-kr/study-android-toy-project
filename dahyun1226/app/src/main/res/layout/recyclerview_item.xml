@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.text.TextUtils"/>
+
         <variable
             name="repoData"
             type="com.example.toyproject2020mvvm.model.data.GithubRepoData" />
@@ -42,7 +44,7 @@
                 android:id="@+id/tv_recyclerview_item_Language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{repoData.language == null ? String.format(@string/no_language) : repoData.language}"
+                android:text="@{TextUtils.isEmpty(repoData.language) ? String.format(@string/no_language) : repoData.language}"
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
