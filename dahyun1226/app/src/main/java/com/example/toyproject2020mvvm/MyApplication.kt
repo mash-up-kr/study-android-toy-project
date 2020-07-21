@@ -1,7 +1,7 @@
 package com.example.toyproject2020mvvm
 
 import android.app.Application
-import com.example.toyproject2020mvvm.appModule
+import com.example.toyproject2020mvvm.di.appModule
 import com.example.toyproject2020mvvm.model.api.RetrofitService
 import com.example.toyproject2020mvvm.model.api.RetrofitServiceInterface
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryImpl
@@ -27,24 +27,3 @@ class MyApplication : Application() {
     }
 }
 
-
-var modelPart = module {
-    //retrofit
-    single<RetrofitServiceInterface> {
-       RetrofitService.getService()
-    }
-    //repository
-    factory<GitRepositoryInterface>{
-        GitRepositoryImpl(get())
-    }
-    //MainViewModelFactory
-    single {
-        MainViewModelFactory(get())
-    }
-    //RepositoryDetailViewModelFactory
-    single {
-        RepositoryDetailViewModelFactory(get())
-    }
-}
-
-val appModule = listOf(modelPart)

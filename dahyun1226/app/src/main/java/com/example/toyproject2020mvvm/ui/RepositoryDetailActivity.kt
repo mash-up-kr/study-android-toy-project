@@ -3,16 +3,11 @@ package com.example.toyproject2020mvvm.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.Observable
 import androidx.lifecycle.ViewModelProvider
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.databinding.ActivityViewRepositoryDetailBindingImpl
-import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
-import com.example.toyproject2020mvvm.viewmodel.MainViewModel
 import com.example.toyproject2020mvvm.viewmodel.RepositoryDetailViewModel
-import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.MainViewModelFactory
 import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.RepositoryDetailViewModelFactory
-import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 
 class RepositoryDetailActivity : AppCompatActivity() {
