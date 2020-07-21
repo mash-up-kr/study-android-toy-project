@@ -9,24 +9,19 @@ import com.example.toyproject2020mvvm.databinding.ActivityViewRepositoryDetailBi
 import com.example.toyproject2020mvvm.viewmodel.RepositoryDetailViewModel
 import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.RepositoryDetailViewModelFactory
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class RepositoryDetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_FULL_NAME = "FullName"
     }
 
-    private lateinit var viewModel: RepositoryDetailViewModel
-
-    private val repositoryDetailViewModelFactory: RepositoryDetailViewModelFactory by inject()
+    private val viewModel: RepositoryDetailViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityViewRepositoryDetailBindingImpl =
             DataBindingUtil.setContentView(this, R.layout.activity_view_repository_detail)
-        viewModel = ViewModelProvider(
-            this,
-            repositoryDetailViewModelFactory
-        ).get(RepositoryDetailViewModel::class.java)
         binding.viewModel = viewModel
         binding.activity = this
         binding.lifecycleOwner = this

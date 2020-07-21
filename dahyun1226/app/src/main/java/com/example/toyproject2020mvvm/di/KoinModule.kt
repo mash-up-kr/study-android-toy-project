@@ -4,8 +4,9 @@ import com.example.toyproject2020mvvm.model.api.RetrofitService
 import com.example.toyproject2020mvvm.model.api.RetrofitServiceInterface
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryImpl
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
-import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.MainViewModelFactory
-import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.RepositoryDetailViewModelFactory
+import com.example.toyproject2020mvvm.viewmodel.MainViewModel
+import com.example.toyproject2020mvvm.viewmodel.RepositoryDetailViewModel
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val modelPart = module {
@@ -17,13 +18,11 @@ val modelPart = module {
     factory<GitRepositoryInterface>{
         GitRepositoryImpl(get())
     }
-    //MainViewModelFactory
-    single {
-        MainViewModelFactory(get())
+    viewModel {
+        MainViewModel(get())
     }
-    //RepositoryDetailViewModelFactory
-    single {
-        RepositoryDetailViewModelFactory(get())
+    viewModel {
+        RepositoryDetailViewModel(get())
     }
 }
 

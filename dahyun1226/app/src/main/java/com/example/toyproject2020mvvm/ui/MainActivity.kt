@@ -11,21 +11,16 @@ import com.example.toyproject2020mvvm.databinding.ActivityMainBinding
 import com.example.toyproject2020mvvm.viewmodel.MainViewModel
 import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.MainViewModelFactory
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mainViewModel: MainViewModel
-
-    private val mainViewModelFactory: MainViewModelFactory by inject()
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
-        mainViewModel =
-            ViewModelProvider(this, mainViewModelFactory).get(
-                MainViewModel::class.java
-            )
         binding.viewModel = mainViewModel
         binding.lifecycleOwner = this
         mainViewModel.toastField.observe(this, Observer {
