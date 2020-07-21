@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.toyproject2020mvvm.R
 import com.example.toyproject2020mvvm.databinding.ActivityMainBinding
 import com.example.toyproject2020mvvm.model.repository.GitRepositoryInterface
-import com.example.toyproject2020mvvm.util.GitRepositoryInjector
 import com.example.toyproject2020mvvm.viewmodel.MainViewModel
 import com.example.toyproject2020mvvm.viewmodel.viewmodelfactory.MainViewModelFactory
 import io.reactivex.disposables.CompositeDisposable
