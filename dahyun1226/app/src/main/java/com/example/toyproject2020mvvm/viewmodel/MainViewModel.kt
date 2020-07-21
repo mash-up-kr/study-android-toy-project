@@ -100,7 +100,7 @@ class MainViewModel(
     }
 
     override fun onCleared() {
-        compositeDisposable.clear()
+        compositeDisposable.dispose()
         super.onCleared()
     }
 }

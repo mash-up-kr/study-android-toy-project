@@ -113,7 +113,7 @@ class RepositoryDetailViewModel(
     }
 
     override fun onCleared() {
-        compositeDisposable.clear()
+        compositeDisposable.dispose()
         super.onCleared()
     }
 
